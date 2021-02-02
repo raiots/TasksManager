@@ -1,0 +1,15 @@
+.text-none-border{
+    BORDER-BOTTOM: 0px solid;
+    BORDER-LEFT: 0px solid;
+    BORDER-RIGHT: 0px solid;
+    BORDER-TOP: 0px solid;
+    /*width:100%;*/
+    overflow:hidden;
+    width:200px;
+    font-size: 0.5rem;
+}
+
+.table-d-center{
+    text-align: center;
+    vertical-align: middle;
+}

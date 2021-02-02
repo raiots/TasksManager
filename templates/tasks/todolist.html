@@ -1,0 +1,168 @@
+{% extends 'tasks/base.html' %}
+
+{% block main_content %}
+
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-xl">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h3 class="m-0"> 我的工作事项 ({{ date }}) <small></small></h3>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'tasks:index' %}">主页</a></li>
+              <li class="breadcrumb-item active">工作包</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <div class="content">
+      <div class="container-xl">
+        <div class="row">
+
+{#        col-lg-6 #}
+          <div class="col-12">
+            <div class="card">
+
+              <div class="card-header">
+                <div class="card-tools">
+                  <ul class="pagination float-right">
+                    {% load taskfilter %}
+                    <li class="page-item"><a class="page-link" href="/todolist/{{ date|last_month }}">«</a></li>
+                    <li class="page-item"><a class="page-link"> {{ date|this_month }}月 </a></li>
+                    <li class="page-item"><a class="page-link" href="/todolist/{{ date|next_month }}">»</a></li>
+                  </ul>
+                </div>
+              </div>
+{#                <div class="card-header">#}
+{#                  <h3 class="card-title">我的任务</h3>#}
+{#                </div>#}
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+{#                  <div class="btn-group">#}
+{#                    <button type="button" class="btn btn-default">1</button>#}
+{#                    <div class="btn-group">#}
+{#                          <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">#}
+{#                          </button>#}
+{#                          <div class="dropdown-menu" style="">#}
+{#                            <a class="dropdown-item" href="#">Dropdown link</a>#}
+{#                            <a class="dropdown-item" href="#">Dropdown link</a>#}
+{#                          </div>#}
+{#                    </div>#}
+{#                  </div>#}
+                  <table class="table" style="word-break: break-all">
+                    <thead>
+                      <br>
+                      <h3 style="text-align: center; letter-spacing: 30px">我的承办</h3>
+                      <HR  width="50%" color=#e2e4e6 SIZE=3>
+                      <tr>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">序号</th>
+                        <th style="width: 280px; text-align:center; vertical-align: middle;">工作事项</th>
+                        <th style="text-align:center; vertical-align: middle;">完成时间</th>
+                        <th style="text-align:center; vertical-align: middle;">工作要求及交付物</th>
+                        <th style="text-align:center; vertical-align: middle; width: 120px">承办单位</th>
+                        <th style="width: 200px;text-align:center; vertical-align: middle;">协办人</th>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">工作量(pre)</th>
+                        <th style="width: 60px; text-align:center; vertical-align: middle;">折算系数</th>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">工作量</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">成熟度</th>
+                        <th style="text-align:center; vertical-align: middle;">完成情况</th>
+                        <th style="width: 120px; text-align:center; vertical-align: middle;">完成质量</th>
+                        <th style="text-align:center; vertical-align: middle;"></th>
+{#                        <th style="width: 40px">Label</th>#}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for todo in my_todo %}
+                      <tr>
+                        <td style="text-align: center">{{ todo.id }}</td>
+                        <td>{{ todo.todo_topic }}</td>
+                        <td style="text-align: center">{{ todo.deadline | date:"m月d日" }}</td>
+                        <td style="width: 160px"><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
+                        <td style="text-align: center">{{ todo.duty_group }}</td>
+                        <td style="text-align: center">{{ todo.sub_executor.all|join:", " }}</td>
+                        <td style="text-align:center;">{{ todo.predict_work }}</td>
+                        <td style="text-align:center;">{{ todo.evaluate_factor }}</td>
+                        <td style="text-align:center;">{{ todo.real_work|default:'' }}</td>
+                        <td >
+                          <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" style="width: {{ todo.maturity }}"></div>
+                          </div>
+                          <span class="badge bg-gradient-blue">{{ todo.maturity }}</span>
+                        </td>
+                        <td style="text-align: center"><textarea style="overflow:hidden; width: 300px">{{ todo.complete_note }}</textarea></td>
+                        <td style="text-align: center">{{ todo.quality_mark|default:'' }}</td>
+                        <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}">填报</a> </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-body p-0">
+                  <table class="table" style="word-break: break-all">
+                    <thead>
+                      <HR  width="100%" color=#e2e4e6 SIZE=9>
+                      </br>
+                      <h3 style="text-align: center; letter-spacing: 30px">我的协办</h3>
+                      <HR  width="50%" color=#e2e4e6 SIZE=3>
+                      <tr>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">序号</th>
+                        <th style="width: 280px; text-align:center; vertical-align: middle;">工作事项</th>
+                        <th style="text-align:center; vertical-align: middle;">完成时间</th>
+                        <th style="text-align:center; vertical-align: middle;">工作要求及交付物</th>
+                        <th style="text-align:center; vertical-align: middle; width: 120px">承办单位</th>
+                        <th style="width: 120px;text-align:center; vertical-align: middle;">承/督办人</th>
+                        <th style="width: 200px;text-align:center; vertical-align: middle;">协办人</th>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">工作量(pre)</th>
+                        <th style="width: 60px; text-align:center; vertical-align: middle;">折算系数</th>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">工作量</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">成熟度</th>
+                        <th style="text-align:center; vertical-align: middle;">完成情况</th>
+                        <th style="width: 120px; text-align:center; vertical-align: middle;">完成质量</th>
+                        <th style="text-align:center; vertical-align: middle;"></th>
+{#                        <th style="width: 40px">Label</th>#}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for todo in my_sub_todo %}
+                      <tr>
+                        <td style="text-align: center">{{ todo.id }}</td>
+                        <td>{{ todo.todo_topic }}</td>
+                        <td style="text-align: center">{{ todo.deadline | date:"m月d日" }}</td>
+                        <td style="width: 160px"><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
+                        <td style="text-align: center">{{ todo.duty_group }}</td>
+                        <td style="text-align: center">{{ todo.main_executor.all|join:", " }}</td>
+                        <td style="text-align: center">{{ todo.sub_executor.all|join:", " }}</td>
+                        <td style="text-align:center;">{{ todo.predict_work }}</td>
+                        <td style="text-align:center;">{{ todo.evaluate_factor }}</td>
+                        <td style="text-align:center;">{{ todo.real_work|default:'' }}</td>
+                        <td >
+                          <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" style="width: {{ todo.maturity }}"></div>
+                          </div>
+                          <span class="badge bg-gradient-blue">{{ todo.maturity }}</span>
+                        </td>
+                        <td style="text-align: center"><textarea style="overflow:hidden; width: 300px">{{ todo.complete_note }}</textarea></td>
+                        <td style="text-align: center">{{ todo.quality_mark|default:'' }}</td>
+                        <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}">填报</a> </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock %}

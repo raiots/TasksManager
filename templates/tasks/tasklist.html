@@ -1,0 +1,114 @@
+{% extends 'tasks/base.html' %}
+
+{% block main_content %}
+
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-xl">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"> 年度任务 <small></small></h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'tasks:index' %}">主页</a></li>
+              <li class="breadcrumb-item active">年度任务</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <div class="content">
+      <div class="container-xl">
+        <div class="row">
+{#        col-lg-6 #}
+          <div class="col-12" style="font-size: 0.8rem; overflow: auto">
+            <div class="card">
+{#                <div class="card-header">#}
+{#                  <h3 class="card-title">我的任务</h3>#}
+{#                </div>#}
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                  <table class="table table-striped" style="word-break: break-all; overflow: auto" cellspacing="0">
+                    <thead>
+                      <tr style="background-color: #f2f2f2">
+                        <th style="width: 100px; vertical-align: middle;">任务属性</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">任务编号</th>
+                        <th style="width: 200px; text-align:center; vertical-align: middle;">任务名称</th>
+                        <th style="text-align:center; vertical-align: middle;">任务来源</th>
+                        <th style="width: 80px;text-align:center; vertical-align: middle;">目标值</th>
+                        <th style="text-align:center; vertical-align: middle; padding: 0" colspan="4">
+                          <table class="table" style="margin: 0;" cellpadding="0">
+                            <tr style="background-color: #f2f2f2"><th colspan="4">任务显性目标及节点</th></tr>
+                            <tr>
+                              <td style="background-color: #BFE7A8; padding-left: 12px">一季度</td>
+                              <td style="background-color: #F5CCB0">二季度</td>
+                              <td style="background-color: #F7E4A8">三季度</td>
+                              <td style="background-color: #83E1E3; padding-right: 12px">四季度</td>
+                            </tr>
+{#                            <thead>#}
+{#                              任务显性目标及节点#}
+{#                            </thead>#}
+{#                            <thead>#}
+{#                              <tr>#}
+{#                                <td>一季度</td>#}
+{#                                <td>二季度</td>#}
+{#                                <td>三季度</td>#}
+{#                                <td>四季度</td>#}
+{#                              </tr>#}
+{#                            </thead>#}
+                          </table>
+                        </th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">完成日期</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">责任单位</th>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">负责人</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">主管领导</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">任务说明</th>
+{#                        <th style="width: 40px">Label</th>#}
+                      </tr>
+                    </thead>
+                    <tbody style="font-size: 0.9rem">
+                    {% for task in tasks %}
+                      <tr style="background-color: white">
+                        <td>{{ task.task_property }}</td>
+                        <td style="text-align:center;">{{ task.task_id }}</td>
+                        <td>{{ task.task_topic }}</td>
+                        <td style="width: 160px">{{ task.task_origin }}</td>
+                        <td>{{ task.aim_value }}</td>
+                        {% load taskfilter %}
+                        <td style="background-color: #BFE7A8; padding: 0">
+                          <textarea class="text-none-border" style="background-color: #BFE7A8;">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'1' }}&#13;&#10;{% endfor %}</textarea>
+                        </td>
+                        <td style="background-color: #F5CCB0; padding: 0">
+                          <textarea class="text-none-border" style="background-color: #F5CCB0">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'2' }}&#13;&#10;{% endfor %}</textarea>
+                        </td>
+                        <td style="background-color: #F7E4A8; padding: 0">
+                          <textarea class="text-none-border" style="background-color: #F7E4A8">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'3' }}&#13;&#10;{% endfor %}</textarea>
+                        </td>
+                        <td style="background-color: #83E1E3; padding: 0">
+                          <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'4' }}&#13;&#10;{% endfor %}</textarea>
+                        </td>
+                        <td>{{ task.deadline | date:"Y年m月" }}</td>
+                        <td style="text-align:center;">{{ task.duty_group }}</td>
+                        <td style="text-align:center;">{{ task.principal }}</td>
+                        <td style="text-align:center;">{{ task.leader }}</td>
+                        <td><textarea>{{ task.task_note }}</textarea></td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+          </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock %}
