@@ -80,16 +80,16 @@
                         <td>{{ task.aim_value }}</td>
                         {% load taskfilter %}
                         <td style="background-color: #BFE7A8; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #BFE7A8;">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'1' }}&#13;&#10;{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #BFE7A8;">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'1'|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #F5CCB0; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #F5CCB0">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'2' }}&#13;&#10;{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #F5CCB0">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'2'|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #F7E4A8; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #F7E4A8">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'3' }}&#13;&#10;{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #F7E4A8">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'3'|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #83E1E3; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'4' }}&#13;&#10;{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'4'|safe }}{% endfor %}</textarea>
                         </td>
                         <td>{{ task.deadline | date:"Y年m月" }}</td>
                         <td style="text-align:center;">{{ task.duty_group }}</td>
@@ -111,4 +111,14 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+    <script>
+    function setHeight(element) {
+      $(element).css({'height':'auto','overflow-y':'hidden'}).height(element.scrollHeight);
+    }
+    $('textarea').each(function () {
+      setHeight(this);
+    }).on('input', function () {
+      setHeight(this);
+    });
+    </script>
 {% endblock %}

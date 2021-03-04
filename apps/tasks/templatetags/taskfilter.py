@@ -13,16 +13,16 @@ def quarter_cate(value, quarter):
     quarter = int(quarter)
 
     if quarter == 1 and 1 <= month <= 3:
-        return value
+        return str(value) + '&#13;&#10;'
 
     elif quarter == 2 and 4 <= month <= 6:
-        return value
+        return str(value) + '&#13;&#10;'
 
     elif quarter == 3 and 7 <= month <= 9:
-        return value
+        return str(value) + '&#13;&#10;'
 
     elif quarter == 4 and 10 <= month <= 12:
-        return value
+        return str(value) + '&#13;&#10;'
 
     else:
         return ''

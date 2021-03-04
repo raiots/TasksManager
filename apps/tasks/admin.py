@@ -45,24 +45,27 @@ class TaskAdmin(admin.ModelAdmin):
     autocomplete_fields = ('related_task',)
     search_fields = ('related_task',)
 
+class TaskInline(admin.StackedInline):
+    model = models.Task
 
 class TodoAdmin(admin.ModelAdmin):
     def sub_executor(self, obj):
         return ', '.join([a.real_name for a in obj.sub_executor.all()])
 
-    fieldsets = (
+    fieldsets = [
         (None, {
-            'fields': (
+            'fields': [
                 'todo_topic', 'todo_note', 'deadline', 'duty_group', 'main_executor', 'sub_executor', 'predict_work',
                 'evaluate_factor',
-            )
+            ]
         }),
         ('完成情况', {
-            'fields': (
-                'real_work', 'complete_note', 'quality_mark', 'maturity'
-            )
-        })
-    )
+            'fields': [
+                'real_work', 'complete_note', 'quality_mark', 'maturity',
+            ], 'classes': ['collapse']
+        }),
+    ]
+    # inlines = [TaskInline]
     list_display = (
         'todo_topic',
         'deadline',
@@ -87,10 +90,13 @@ class TodoAdmin(admin.ModelAdmin):
         return obj.task_id
     def lined_task(self, obj):
         return obj.lined_task
+    def task_origin(self, obj):
+        return obj.task_origin
     task_id.admin_order_field = 'task__task_id'
     task_id.short_description = '任务编号'
     lined_task.admin_order_field = 'task__task_topic'
     lined_task.short_description = '任务名称'
+    task_origin.short_description = '任务来源'
 
 
 admin.site.register(models.Task, TaskAdmin)

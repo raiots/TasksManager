@@ -1,1 +1,203 @@
 {% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block main_content %}
+    <div class="content-wrapper" style="min-height: 1200.88px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>总览</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">ChartJS</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">CPU Traffic</span>
+                        <span class="info-box-number">
+                          10
+                          <small>%</small>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Likes</span>
+                <span class="info-box-number">41,410</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Sales</span>
+                <span class="info-box-number">760</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">New Members</span>
+                <span class="info-box-number">2,000</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BAR CHART -->
+                        <div class="card card-gray">
+                            <div class="card-header">
+                                <h3 class="card-title">Bar Chart</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                        class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <canvas id="barChart"
+                                            style="height: 230px; min-height: 230px; display: block; width: 764px;"
+                                            width="764" height="230" class="chartjs-render-monitor"></canvas>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col (MAIN) -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+        <div class="content-wrapper">
+            {% for user in users %}
+                {{ user }}
+                {{ user.get_predict_work_count.total_predict_work }}
+                {{ user.get_total_point }}
+                {{ user.main_executor.count }}
+                {% for todo in user.main_executor.all %}
+                    {{ todo }}
+                    {{ todo.points }}
+                {% endfor %}
+                </br>
+            {% endfor %}
+        </div>
+{% endblock %}
+
+{% block script %}
+    <!-- ChartJS -->
+    <script src="{% static 'tasks/plugins/chart.js/Chart.min.js' %}"></script>
+    <script>
+      $(function () {
+        /* ChartJS
+         * -------
+         * Here we will create a few charts using ChartJS
+         */
+          var areaChartData = {
+              labels  : [{% for user in users %}'{{ user }}', {% endfor %}],
+              datasets: [
+                {
+                  label               : 'Digital Goods',
+                  backgroundColor     : 'rgba(60,141,188,0.9)',
+                  borderColor         : 'rgba(60,141,188,0.8)',
+                  pointRadius          : false,
+                  pointColor          : '#3b8bba',
+                  pointStrokeColor    : 'rgba(60,141,188,1)',
+                  pointHighlightFill  : '#fff',
+                  pointHighlightStroke: 'rgba(60,141,188,1)',
+                  data                : [28, 48, 40, 19, 86, 27, 90]
+                },
+                {
+                  label               : 'Electronics',
+                  backgroundColor     : 'rgba(210, 214, 222, 1)',
+                  borderColor         : 'rgba(210, 214, 222, 1)',
+                  pointRadius         : false,
+                  pointColor          : 'rgba(210, 214, 222, 1)',
+                  pointStrokeColor    : '#c1c7d1',
+                  pointHighlightFill  : '#fff',
+                  pointHighlightStroke: 'rgba(220,220,220,1)',
+                  data                : [65, 59, 80, 81, 56, 55, 40]
+                },
+              ]
+    }
+        //-------------
+        //- BAR CHART -
+        //-------------
+        var barChartCanvas = $('#barChart').get(0).getContext('2d')
+        var barChartData = jQuery.extend(true, {}, areaChartData)
+        var temp0 = areaChartData.datasets[0]
+        var temp1 = areaChartData.datasets[1]
+        barChartData.datasets[0] = temp1
+        barChartData.datasets[1] = temp0
+
+        var barChartOptions = {
+          responsive              : true,
+          maintainAspectRatio     : false,
+          datasetFill             : false
+        }
+
+        var barChart = new Chart(barChartCanvas, {
+          type: 'bar',
+          data: barChartData,
+          options: barChartOptions
+        })
+
+      })
+    </script>
+{% endblock %}

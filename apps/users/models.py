@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractUser, Group
 
 
 # Create your models here.
+from django.db.models import Avg, Sum, F, Value
+
+
 class User(AbstractUser):
     real_name = models.CharField(max_length=150, verbose_name='姓名')
     staff_id = models.CharField(max_length=150, verbose_name='工号')
@@ -14,6 +17,14 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.real_name
+
+    @classmethod
+    def get_total_point(cls):
+        return cls.objects.aggregate(total=Sum(F('main_executor__predict_work') * F('main_executor__evaluate_factor') + F('sub_executor__predict_work') * F('sub_executor__evaluate_factor')))['total']
+
+    @classmethod
+    def get_predict_work_count(cls):
+        return cls.objects.aggregate(total_predict_work=Sum('main_executor__predict_work'))
 
 
 class MyGroup(Group):

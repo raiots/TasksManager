@@ -8,13 +8,14 @@ from django.views import View
 # Create your views here.
 from apps.tasks.models import Todo, Task
 from apps.tasks.forms import TodoForm
+from apps.users.models import User
 
 
 class IndexView(View):
     def get(self, request):
-        tasks = Task.objects.filter().order_by('task_id')
-        context = {'tasks': tasks}
-        return render(request, 'tasks/tasklist.html', context)
+        users = User.objects.all()
+        context = {'users': users}
+        return render(request, 'tasks/index.html', context)
 
 
 class TodoListView(View):
