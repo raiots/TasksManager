@@ -80,7 +80,7 @@
                     <tbody>
                       {% for todo in my_todo %}
                       <tr>
-                        <td style="text-align: center">{{ todo.id }}</td>
+                        <td style="text-align: center">{{ forloop.counter }}</td>
                         <td>{{ todo.todo_topic }}</td>
                         <td style="text-align: center">{{ todo.deadline | date:"m月d日" }}</td>
                         <td style="width: 160px"><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
@@ -132,7 +132,7 @@
                     <tbody>
                       {% for todo in my_sub_todo %}
                       <tr>
-                        <td style="text-align: center">{{ todo.id }}</td>
+                        <td style="text-align: center">{{ forloop.counter }}</td>
                         <td>{{ todo.todo_topic }}</td>
                         <td style="text-align: center">{{ todo.deadline | date:"m月d日" }}</td>
                         <td style="width: 160px"><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
