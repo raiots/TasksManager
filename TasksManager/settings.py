@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import time
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -150,3 +151,68 @@ SIMPLEUI_HOME_TITLE = '任务管理系统'
 SIMPLEUI_HOME_ICON = 'el el-icon-platform-eleme'
 # ICON 支持element-ui和fontawesome  eg：fa fa-user
 # https://zhuanlan.zhihu.com/p/113447102
+
+# 指定simpleui默认的主题,指定一个文件名，相对路径就从simpleui的theme目录读取
+SIMPLEUI_DEFAULT_THEME = 'ant.design.css'
+
+SIMPLEUI_CONFIG = {
+    'system_keep': True,
+    'menu_display': ['任务管理', '系统配置', '多级菜单测试', '动态菜单测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'dynamic': True,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
+    'menus': [{
+        'name': '任务管理',
+        'icon': 'fas fa-code',
+        'models': [{
+            'app': 'tasks',
+            'name': '年度任务',
+            'url': 'tasks/task'
+        }, {
+            'name': '工作包',
+            'url': 'tasks/todo?o=3'
+        }]
+    }, {
+        'app': 'admin',
+        'name': '系统配置',
+        'icon': 'fas fa-user-shield',
+        'models': [{
+            'name': '用户',
+            'icon': 'fa fa-user',
+            'url': 'users/user'
+        }, {
+            'name': '部门'
+        }]
+    }, {
+        # 自2021.02.01+ 支持多级菜单，models 为子菜单名
+        'name': '多级菜单测试',
+        'icon': 'fa fa-file',
+      	# 二级菜单
+        'models': [{
+            'name': 'Baidu',
+            'icon': 'far fa-surprise',
+            # 第三级菜单 ，
+            'models': [
+                {
+                  'name': '爱奇艺',
+                  'url': 'https://www.iqiyi.com/dianshiju/'
+                  # 第四级就不支持了，element只支持了3级
+                }, {
+                    'name': '百度问答',
+                    'icon': 'far fa-surprise',
+                    'url': 'https://zhidao.baidu.com/'
+                }
+            ]
+        }, {
+            'name': '内网穿透',
+            'url': 'https://www.wezoz.com',
+            'icon': 'fab fa-github'
+        }]
+    }, {
+        'name': '动态菜单测试' ,
+        'icon': 'fa fa-desktop',
+        'models': [{
+            'name': time.time(),
+            'url': 'http://baidu.com',
+            'icon': 'far fa-surprise'
+        }]
+    }]
+}

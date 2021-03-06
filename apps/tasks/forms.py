@@ -9,6 +9,6 @@ class LoginForm(forms.Form):
 class TodoForm(forms.ModelForm):
     class Meta:
         model = Todo
-        fields = ['maturity', 'complete_note']
+        fields = ['maturity', 'real_work', 'complete_note']
         labels ={'text': ''}
-        widgets = {'row': '3'}
+        widgets = {'rows': '3'}

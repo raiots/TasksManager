@@ -26,26 +26,30 @@
         <div class="row">
           <div class="col-md-6">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-gray">
                 <h3 class="card-title">
                   <i class="fas fa-text-width"></i>
                   任务详情
                 </h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <div class="card-body bg-gray-light">
                 <dl class="row">
                   <dt class="col-sm-4">工作事项</dt>
                   <dd class="col-sm-8">{{ todo_detail.todo_topic }}</dd>
                   <dt class="col-sm-4">交付物</dt>
                   <dd class="col-sm-8">{{ todo_detail.todo_note }}</dd>
+                  <dt class="col-sm-4">完成时间</dt>
+                  <dd class="col-sm-8">{{ todo_detail.deadline }}</dd>
 {#                  <dd class="col-sm-8 offset-sm-4">Donec id elit non mi porta gravida at eget metus.</dd>#}
                   <dt class="col-sm-4">责任单位</dt>
                   <dd class="col-sm-8">{{ todo_detail.duty_group }}</dd>
-                  <dt class="col-sm-4">责任人</dt>
-                  <dd class="col-sm-8">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-                    sit amet risus.
-                  </dd>
+                  <dt class="col-sm-4">承/督办人</dt>
+                  <dd class="col-sm-8">{{ todo_detail.main_executor }}</dd>
+                  <dt class="col-sm-4">协办人</dt>
+                  <dd class="col-sm-8">{{ todo_detail.sub_executor.all|join:', ' }}</dd>
+                  <dt class="col-sm-4">预计工作量</dt>
+                  <dd class="col-sm-8">{{ todo_detail.predict_work }}</dd>
                 </dl>
               </div>
               <!-- /.card-body -->
@@ -55,8 +59,8 @@
           <div class="col-md-6">
             <!-- general form elements -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+              <div class="card-header bg-gray">
+                <h3 class="card-title">更新工作包</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -65,6 +69,10 @@
                   <div class="form-group">
                     <label for="exampleInputEmail1">成熟度</label>
                     {{ form.maturity }}
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">实际工作量</label>
+                    {{ form.real_work }}
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">完成情况说明</label>

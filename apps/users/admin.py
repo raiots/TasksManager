@@ -36,6 +36,9 @@ class QualityMarkAdmin(admin.ModelAdmin):
         'mark_name',
         'mark_value'
     )
+    def mark_value(self):
+        return self.mark_value
+    mark_value.short_description = 'ss'
 
 admin.site.register(models.User, MyUserAdmin)
 admin.site.register(models.MyGroup, MyGroupAdmin)

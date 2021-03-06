@@ -7,6 +7,12 @@ from . import models
 from apps.users.models import TaskProperty
 
 
+class TodoInline(admin.StackedInline):
+    model = models.Todo
+    extra = 0
+    # classes = ['collapse']
+
+
 class TaskAdmin(admin.ModelAdmin):
 
     # def formfield_for_manytomany(self, db_field, request, **kwargs):
@@ -38,65 +44,81 @@ class TaskAdmin(admin.ModelAdmin):
             'fields': (
                 ('task_property', 'task_id', 'task_topic', 'task_origin', 'aim_value', 'deadline', 'duty_group',
                  'principal', 'leader'),
-                'task_note', 'related_task', 'department'),
+                'task_note', 'department'),
         }),
     )
+    inlines = [TodoInline]
     raw_id_fields = ("principal", "leader",)
-    autocomplete_fields = ('related_task',)
-    search_fields = ('related_task',)
+    list_display_links = ('task_topic',)
+    # autocomplete_fields = ('related_task',)
+    # search_fields = ('related_task',)
 
-class TaskInline(admin.StackedInline):
-    model = models.Task
 
 class TodoAdmin(admin.ModelAdmin):
-    def sub_executor(self, obj):
-        return ', '.join([a.real_name for a in obj.sub_executor.all()])
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'related_task':
+            kwargs["queryset"] = models.Task.objects.filter(department=request.user.department)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     fieldsets = [
         (None, {
             'fields': [
-                'todo_topic', 'todo_note', 'deadline', 'duty_group', 'main_executor', 'sub_executor', 'predict_work',
+                'related_task', 'todo_topic', 'todo_note', 'deadline', 'duty_group', 'main_executor', 'sub_executor', 'predict_work',
                 'evaluate_factor',
             ]
         }),
-        ('完成情况', {
-            'fields': [
-                'real_work', 'complete_note', 'quality_mark', 'maturity',
-            ], 'classes': ['collapse']
+
+        (None, {
+            'fields': [],
         }),
     ]
-    # inlines = [TaskInline]
     list_display = (
         'todo_topic',
         'deadline',
         'task_id',
         'lined_task',
-        'task_origin',
-        'duty_department',
+        # 'task_origin',
+        # 'duty_department',
         'duty_group',
         'main_executor',
-        # 'sub_executor',
+        'list_sub_executor',
+        'maturity',
+        'real_work',
+        'complete_note',
+        'quality_mark',
     )
-    list_filter = ('deadline', )
+    list_editable = ['quality_mark']
+    list_filter = ('deadline',)
     list_display_links = ('todo_topic', 'deadline', )
     date_hierarchy = 'deadline'
     list_per_page = 20
     raw_id_fields = ("main_executor", "sub_executor")
     search_fields = ('todo_topic',)
-    # ordering = ('task_id',)
+    ordering = ('related_task', )
+
     def approval_state(self, obj):
         return format_html('<span style="color:{};">{}</span>', 'green', obj.approval)
+
     def task_id(self, obj):
         return obj.task_id
-    def lined_task(self, obj):
-        return obj.lined_task
+    task_id.admin_order_field = 'related_task__task_id'
+    task_id.short_description = '任务编号'
+
     def task_origin(self, obj):
         return obj.task_origin
-    task_id.admin_order_field = 'task__task_id'
-    task_id.short_description = '任务编号'
-    lined_task.admin_order_field = 'task__task_topic'
-    lined_task.short_description = '任务名称'
     task_origin.short_description = '任务来源'
+
+    def duty_department(self, obj):
+        return obj.duty_group
+    duty_department.short_description = '责任部门'
+
+    def lined_task(self, obj):
+        return obj.related_task
+    lined_task.short_description = '任务名称'
+
+
+
+
 
 
 admin.site.register(models.Task, TaskAdmin)

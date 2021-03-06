@@ -79,3 +79,8 @@ class TodoEntryView(View):
             form.save()
             return redirect('tasks:index')
             # return redirect('tasks:todo_detail', pk=pk)
+
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, 'tasks/about.html')

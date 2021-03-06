@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>任务进度管理系统</title>
+  <title>任务管理系统</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{% static 'tasks/dist/css/googlefont.css' %}">
@@ -189,7 +189,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 {#        </li>#}
           {% if user.is_authenticated %}
           <li class="nav-tabs">
-            <a>欢迎，{{ user.real_name }}</a>
+            <a>欢迎，</a>
+            <b style="color: cadetblue">{{ user.real_name }}</b>
+            <a>。 本系统为非涉密应用系统，禁止处理秘密级及以上信息！！！</a>
           </li>
           <li class="navbar-tabs">
             <a href="{% url 'tasks:logout' %}">&nbsp;登出</a>
@@ -305,7 +307,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       CHRDI Task Manager <a href="#">ver 0.5 - beta</a>
     </div>
     <!-- Default to the left -->
-    <strong>Made with ❤ by <a href="https://raiot.me">Raiot</a>.</strong>
+    <strong>Made with ❤ by <a href="{% url 'tasks:about' %}">Raiot</a>.</strong>
   </footer>
 </div>
 <!-- ./wrapper -->
