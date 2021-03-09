@@ -156,8 +156,8 @@ SIMPLEUI_HOME_ICON = 'el el-icon-platform-eleme'
 SIMPLEUI_DEFAULT_THEME = 'ant.design.css'
 
 SIMPLEUI_CONFIG = {
-    'system_keep': True,
-    'menu_display': ['任务管理', '系统配置', '多级菜单测试', '动态菜单测试'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
+    'system_keep': False,
+    'menu_display': ['任务管理', '系统配置', '关于'],      # 开启排序和过滤功能, 不填此字段为默认排序和全部显示, 空列表[] 为全部不显示.
     'dynamic': True,    # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时动态展示菜单内容
     'menus': [{
         'name': '任务管理',
@@ -177,9 +177,22 @@ SIMPLEUI_CONFIG = {
         'models': [{
             'name': '用户',
             'icon': 'fa fa-user',
-            'url': 'users/user'
+            'url': 'users/user',
         }, {
-            'name': '部门'
+            'name': '部门',
+            'url': 'users/department'
+        }, {
+            'name': '任务属性',
+            'url': 'users/taskproperty',
+        }, {
+            'name': '权限组',
+            'url': 'users/mygroup',
+        }, {
+            'name': '评价等级定义',
+            'url': 'users/qualitymark',
+        }, {
+            'name': '评价等级考核系数',
+            'url': 'users/markvalue'
         }]
     }, {
         # 自2021.02.01+ 支持多级菜单，models 为子菜单名
@@ -207,12 +220,15 @@ SIMPLEUI_CONFIG = {
             'icon': 'fab fa-github'
         }]
     }, {
-        'name': '动态菜单测试' ,
+        'name': '动态菜单测试',
         'icon': 'fa fa-desktop',
         'models': [{
             'name': time.time(),
             'url': 'http://baidu.com',
             'icon': 'far fa-surprise'
         }]
+    }, {
+        'name': '关于',
+        'url': '/about'
     }]
 }

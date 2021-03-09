@@ -125,6 +125,10 @@
         <!-- /.content -->
     </div>
         <div class="content-wrapper">
+        {% for point in points %}
+          {{ point }}
+          {{ point.a }}
+          {% endfor %}
 {#            {% for user in users %}#}
 {#                {{ user }}#}
 {#                {{ user.get_predict_work_count.total_predict_work }}#}

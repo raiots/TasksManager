@@ -1,6 +1,7 @@
 from django.contrib import auth, messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum, F
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 import django.utils.timezone as timezone
@@ -12,9 +13,11 @@ from apps.users.models import User
 
 
 class IndexView(View):
+    @method_decorator(login_required)
     def get(self, request):
         users = User.objects.all()
-        context = {'users': users}
+        points = User.objects.annotate(a=Sum(F('main_executor__predict_work') * F('main_executor__evaluate_factor') + F('sub_executor__predict_work') * F('sub_executor__evaluate_factor')))
+        context = {'users': users, 'points': points}
         return render(request, 'tasks/index.html', context)
 
 

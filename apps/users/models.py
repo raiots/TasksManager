@@ -20,7 +20,9 @@ class User(AbstractUser):
 
     @classmethod
     def get_total_point(cls):
-        return cls.objects.aggregate(total=Sum(F('main_executor__predict_work') * F('main_executor__evaluate_factor') + F('sub_executor__predict_work') * F('sub_executor__evaluate_factor')))['total']
+        return cls.objects.annotate(total=Sum('main_executor__predict_work'))
+    # def get_total_point(cls):
+    #     return cls.objects.aggregate(total=Sum(F('main_executor__predict_work') * F('main_executor__evaluate_factor') + F('sub_executor__predict_work') * F('sub_executor__evaluate_factor')))['total']
 
     @classmethod
     def get_predict_work_count(cls):

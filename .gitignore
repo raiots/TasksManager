@@ -3,3 +3,4 @@
 /packagesdir/
 /db.sqlite3
 /identifier.sqlite
+migrations/
