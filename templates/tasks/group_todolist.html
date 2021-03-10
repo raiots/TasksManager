@@ -60,16 +60,16 @@
                       <tr>
                         <th style="width: 10px; text-align:center; vertical-align: middle;">#</th>
                         <th style="width: 280px; text-align:center; vertical-align: middle;">工作事项</th>
-                        <th style="text-align:center; vertical-align: middle;">完成时间</th>
-                        <th style="text-align:center; vertical-align: middle;">工作要求及交付物</th>
-                        <th style="text-align:center; vertical-align: middle; width: 120px">承办单位</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">完成时间</th>
+                        <th style="width: 160px; text-align:center; vertical-align: middle;">工作要求及交付物</th>
+                        <th style="width: 120px; text-align:center; vertical-align: middle;">承办单位</th>
                         <th style="width: 120px;text-align:center; vertical-align: middle;">承/督办人</th>
                         <th style="width: 200px;text-align:center; vertical-align: middle;">协办人</th>
                         <th style="width: 80px; text-align:center; vertical-align: middle;">工作量(pre)</th>
                         <th style="width: 60px; text-align:center; vertical-align: middle;">折算系数</th>
                         <th style="width: 80px; text-align:center; vertical-align: middle;">工作量</th>
                         <th style="width: 100px; text-align:center; vertical-align: middle;">成熟度</th>
-                        <th style="text-align:center; vertical-align: middle;">完成情况</th>
+                        <th style="width: 220px; text-align:center; vertical-align: middle;">完成情况</th>
                         <th style="width: 120px; text-align:center; vertical-align: middle;">完成质量</th>
 {#                        <th style="width: 40px">Label</th>#}
                       </tr>
@@ -93,7 +93,7 @@
                           </div>
                           <span class="badge bg-gradient-blue">{{ todo.maturity }}</span>
                         </td>
-                        <td style="text-align: center"><textarea style="overflow:hidden; width: 300px">{{ todo.complete_note }}</textarea></td>
+                        <td style="text-align: center"><textarea style="overflow:hidden;width:100%;">{{ todo.complete_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.quality_mark|default:'' }}</td>
                       </tr>
                       {% endfor %}

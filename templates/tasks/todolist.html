@@ -61,18 +61,18 @@
                       <h3 style="text-align: center; letter-spacing: 30px">我的承办</h3>
                       <HR  width="50%" color=#e2e4e6 SIZE=3>
                       <tr>
-                        <th style="width: 80px; text-align:center; vertical-align: middle;">序号</th>
-                        <th style="width: 280px; text-align:center; vertical-align: middle;">工作事项</th>
-                        <th style="text-align:center; vertical-align: middle;">完成时间</th>
-                        <th style="text-align:center; vertical-align: middle;">工作要求及交付物</th>
-                        <th style="text-align:center; vertical-align: middle; width: 120px">承办单位</th>
-                        <th style="width: 200px;text-align:center; vertical-align: middle;">协办人</th>
+                        <th style="width: 70px; text-align:center; vertical-align: middle;">序号</th>
+                        <th style="width: 300px; text-align:center; vertical-align: middle;">工作事项</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">完成时间</th>
+                        <th style="width: 240px; text-align:center; vertical-align: middle;">工作要求及交付物</th>
+                        <th style="width: 140px; text-align:center; vertical-align: middle;">承办单位</th>
+                        <th style="width: 200px; text-align:center; vertical-align: middle;">协办人</th>
                         <th style="width: 80px; text-align:center; vertical-align: middle;">工作量(pre)</th>
                         <th style="width: 60px; text-align:center; vertical-align: middle;">折算系数</th>
                         <th style="width: 80px; text-align:center; vertical-align: middle;">工作量</th>
                         <th style="width: 100px; text-align:center; vertical-align: middle;">成熟度</th>
-                        <th style="text-align:center; vertical-align: middle;">完成情况</th>
-                        <th style="width: 110px; text-align:center; vertical-align: middle;">完成质量</th>
+                        <th style="width: 320px; text-align:center; vertical-align: middle;">完成情况</th>
+                        <th style="width: 120px; text-align:center; vertical-align: middle;">完成质量</th>
                         <th style="text-align:center; vertical-align: middle;"></th>
 {#                        <th style="width: 40px">Label</th>#}
                       </tr>
@@ -83,7 +83,7 @@
                         <td style="text-align: center">{{ forloop.counter }}</td>
                         <td>{{ todo.todo_topic }}</td>
                         <td style="text-align: center">{{ todo.deadline | date:"m月d日" }}</td>
-                        <td style="width: 160px"><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
+                        <td><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.duty_group }}</td>
                         <td style="text-align: center">{{ todo.sub_executor.all|join:", " }}</td>
                         <td style="text-align:center;">{{ todo.predict_work }}</td>
@@ -95,7 +95,7 @@
                           </div>
                           <span class="badge bg-gradient-blue">{{ todo.maturity }}</span>
                         </td>
-                        <td style="text-align: center"><textarea style="overflow:hidden; width: 200px" readonly="readonly">{{ todo.complete_note }}</textarea></td>
+                        <td style="text-align: center"><textarea style="overflow:hidden; width: 100%" readonly="readonly">{{ todo.complete_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.quality_mark|default:'' }}</td>
                         <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}">填报</a> </td>
                       </tr>
@@ -112,19 +112,19 @@
                       <h3 style="text-align: center; letter-spacing: 30px">我的协办</h3>
                       <HR  width="50%" color=#e2e4e6 SIZE=3>
                       <tr>
-                        <th style="width: 80px; text-align:center; vertical-align: middle;">序号</th>
-                        <th style="width: 280px; text-align:center; vertical-align: middle;">工作事项</th>
-                        <th style="text-align:center; vertical-align: middle;">完成时间</th>
-                        <th style="text-align:center; vertical-align: middle;">工作要求及交付物</th>
-                        <th style="text-align:center; vertical-align: middle; width: 120px">承办单位</th>
+                        <th style="width: 70px; text-align:center; vertical-align: middle;">序号</th>
+                        <th style="width: 300px; text-align:center; vertical-align: middle;">工作事项</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">完成时间</th>
+                        <th style="width: 240px; text-align:center; vertical-align: middle;">工作要求及交付物</th>
+                        <th style="width: 140px; text-align:center; vertical-align: middle;">承办单位</th>
                         <th style="width: 200px;text-align:center; vertical-align: middle;">承/督办人</th>
 {#                        <th style="width: 200px;text-align:center; vertical-align: middle;">协办人</th>#}
                         <th style="width: 80px; text-align:center; vertical-align: middle;">工作量(pre)</th>
                         <th style="width: 60px; text-align:center; vertical-align: middle;">折算系数</th>
                         <th style="width: 80px; text-align:center; vertical-align: middle;">工作量</th>
                         <th style="width: 100px; text-align:center; vertical-align: middle;">成熟度</th>
-                        <th style="text-align:center; vertical-align: middle;">完成情况</th>
-                        <th style="width: 110px; text-align:center; vertical-align: middle;">完成质量</th>
+                        <th style="width: 320px; text-align:center; vertical-align: middle;">完成情况</th>
+                        <th style="width: 120px; text-align:center; vertical-align: middle;">完成质量</th>
                         <th style="text-align:center; vertical-align: middle;"></th>
 {#                        <th style="width: 40px">Label</th>#}
                       </tr>
@@ -135,7 +135,7 @@
                         <td style="text-align: center">{{ forloop.counter }}</td>
                         <td>{{ todo.todo_topic }}</td>
                         <td style="text-align: center">{{ todo.deadline | date:"m月d日" }}</td>
-                        <td style="width: 160px"><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
+                        <td><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.duty_group }}</td>
                         <td style="text-align: center">{{ todo.main_executor }}</td>
 {#                        <td style="text-align: center">{{ todo.sub_executor.all|join:", " }}</td>#}
@@ -148,7 +148,7 @@
                           </div>
                           <span class="badge bg-gradient-blue">{{ todo.maturity }}</span>
                         </td>
-                        <td style="text-align: center"><textarea style="overflow:hidden; width: 200px" readonly="readonly">{{ todo.complete_note }}</textarea></td>
+                        <td style="text-align: center"><textarea style="overflow:hidden; width:100%" readonly="readonly">{{ todo.complete_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.quality_mark|default:'' }}</td>
                         <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}">填报</a> </td>
                       </tr>

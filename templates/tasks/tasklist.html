@@ -35,11 +35,11 @@
                   <table class="table table-striped" style="word-break: break-all; overflow: auto" cellspacing="0">
                     <thead>
                       <tr style="background-color: #f2f2f2">
-                        <th style="width: 100px; vertical-align: middle;">任务属性</th>
-                        <th style="width: 100px; text-align:center; vertical-align: middle;">任务编号</th>
-                        <th style="width: 200px; text-align:center; vertical-align: middle;">任务名称</th>
-                        <th style="text-align:center; vertical-align: middle;">任务来源</th>
-                        <th style="width: 80px;text-align:center; vertical-align: middle;">目标值</th>
+                        <th style="width: 140px; text-align:center; vertical-align: middle;">任务属性</th>
+                        <th style="width: 60px; text-align:center; vertical-align: middle;">任务编号</th>
+                        <th style="width: 220px; text-align:center; vertical-align: middle;">任务名称</th>
+                        <th style="width: 120px; text-align:center; vertical-align: middle;">任务来源</th>
+                        <th style="width: 120px;text-align:center; vertical-align: middle;">目标值</th>
                         <th style="text-align:center; vertical-align: middle; padding: 0" colspan="4">
                           <table class="table" style="margin: 0;" cellpadding="0">
                             <tr style="background-color: #f2f2f2"><th colspan="4">任务显性目标及节点</th></tr>
@@ -62,21 +62,21 @@
 {#                            </thead>#}
                           </table>
                         </th>
-                        <th style="width: 100px; text-align:center; vertical-align: middle;">完成日期</th>
+                        <th style="width: 80px; text-align:center; vertical-align: middle;">完成日期</th>
                         <th style="width: 100px; text-align:center; vertical-align: middle;">责任单位</th>
-                        <th style="width: 80px; text-align:center; vertical-align: middle;">负责人</th>
+                        <th style="width: 100px; text-align:center; vertical-align: middle;">负责人</th>
                         <th style="width: 100px; text-align:center; vertical-align: middle;">主管领导</th>
-                        <th style="width: 100px; text-align:center; vertical-align: middle;">任务说明</th>
+                        <th style="width: 240px; text-align:center; vertical-align: middle;">任务说明</th>
 {#                        <th style="width: 40px">Label</th>#}
                       </tr>
                     </thead>
                     <tbody style="font-size: 0.9rem">
                     {% for task in tasks %}
                       <tr style="background-color: white">
-                        <td>{{ task.task_property }}</td>
+                        <td style="text-align:center;">{{ task.task_property }}</td>
                         <td style="text-align:center;">{{ task.task_id }}</td>
                         <td>{{ task.task_topic }}</td>
-                        <td style="width: 160px">{{ task.task_origin }}</td>
+                        <td style="text-align:center;">{{ task.task_origin }}</td>
                         <td>{{ task.aim_value }}</td>
                         {% load taskfilter %}
                         <td style="background-color: #BFE7A8; padding: 0">
@@ -91,11 +91,11 @@
                         <td style="background-color: #83E1E3; padding: 0">
                           <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'4'|safe }}{% endfor %}</textarea>
                         </td>
-                        <td>{{ task.deadline | date:"Y年m月" }}</td>
+                        <td style="text-align:center;">{{ task.deadline | date:"Y.m" }}</td>
                         <td style="text-align:center;">{{ task.duty_group }}</td>
                         <td style="text-align:center;">{{ task.principal }}</td>
                         <td style="text-align:center;">{{ task.leader }}</td>
-                        <td><textarea>{{ task.task_note }}</textarea></td>
+                        <td><textarea style="overflow:hidden;width:100%;">{{ task.task_note }}</textarea></td>
                       </tr>
                     {% endfor %}
                     </tbody>
