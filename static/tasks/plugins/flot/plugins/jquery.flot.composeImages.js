@@ -122,7 +122,7 @@ temporary images load their data.
                     rulesList.push(rule.cssText);
                 }
             } catch (e) {
-                console.log('Failed to get some css rules');
+                console.log('Failed to get some font.css rules');
             }
         }
         return rulesList;

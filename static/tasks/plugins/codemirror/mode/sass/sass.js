@@ -12,7 +12,7 @@
 "use strict";
 
 CodeMirror.defineMode("sass", function(config) {
-  var cssMode = CodeMirror.mimeModes["text/css"];
+  var cssMode = CodeMirror.mimeModes["text/font.css"];
   var propertyKeywords = cssMode.propertyKeywords || {},
       colorKeywords = cssMode.colorKeywords || {},
       valueKeywords = cssMode.valueKeywords || {},

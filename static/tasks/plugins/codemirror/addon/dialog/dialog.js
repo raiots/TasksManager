@@ -1,7 +1,7 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
-// Open simple dialogs on top of an editor. Relies on dialog.css.
+// Open simple dialogs on top of an editor. Relies on dialog.font.css.
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS

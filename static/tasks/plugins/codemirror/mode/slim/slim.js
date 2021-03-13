@@ -20,7 +20,7 @@
     var embedded = {
       ruby: "ruby",
       javascript: "javascript",
-      css: "text/css",
+      css: "text/font.css",
       sass: "text/x-sass",
       scss: "text/x-scss",
       less: "text/x-less",

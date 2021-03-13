@@ -25,13 +25,13 @@
                 <div class="row">
                   <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
-                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-tasks"></i></span>
 
                       <div class="info-box-content">
-                        <span class="info-box-text">CPU Traffic</span>
+                        <span class="info-box-text">承办任务数</span>
                         <span class="info-box-number">
-                          10
-                          <small>%</small>
+                          {{ request.user.main_executor.count }}
+                          <small>个</small>
                         </span>
                       </div>
                       <!-- /.info-box-content -->
@@ -41,11 +41,13 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tasks"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">协办任务数</span>
+                <span class="info-box-number">{{ user.sub_executor.count }}
+                <small>个</small>
+                </span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -56,79 +58,81 @@
           <!-- fix for small devices only -->
           <div class="clearfix hidden-md-up"></div>
 
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
+{#          <div class="col-12 col-sm-6 col-md-3">#}
+{#            <div class="info-box mb-3">#}
+{#              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>#}
+{##}
+{#              <div class="info-box-content">#}
+{#                <span class="info-box-text">Sales</span>#}
+{#                <span class="info-box-number">760</span>#}
+{#              </div>#}
+{#              <!-- /.info-box-content -->#}
+{#            </div>#}
+{#            <!-- /.info-box -->#}
+{#          </div>#}
+{#          <!-- /.col -->#}
+{#          <div class="col-12 col-sm-6 col-md-3">#}
+{#            <div class="info-box mb-3">#}
+{#              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>#}
+{##}
+{#              <div class="info-box-content">#}
+{#                <span class="info-box-text">New Members</span>#}
+{#                <span class="info-box-number">2,000</span>#}
+{#              </div>#}
+{#              <!-- /.info-box-content -->#}
+{#            </div>#}
+{#            <!-- /.info-box -->#}
+{#          </div>#}
           <!-- /.col -->
         </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- BAR CHART -->
-                        <div class="card card-gray">
-                            <div class="card-header">
-                                <h3 class="card-title">Bar Chart</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                        class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                                        class="fas fa-times"></i></button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart">
-                                    <div class="chartjs-size-monitor">
-                                        <div class="chartjs-size-monitor-expand">
-                                            <div class=""></div>
-                                        </div>
-                                        <div class="chartjs-size-monitor-shrink">
-                                            <div class=""></div>
-                                        </div>
-                                    </div>
-                                    <canvas id="barChart"
-                                            style="height: 230px; min-height: 230px; display: block; width: 764px;"
-                                            width="764" height="230" class="chartjs-render-monitor"></canvas>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col (MAIN) -->
-                </div>
+{#                <div class="row">#}
+{#                    <div class="col-md-12">#}
+{#                        <!-- BAR CHART -->#}
+{#                        <div class="card card-gray">#}
+{#                            <div class="card-header">#}
+{#                                <h3 class="card-title">Bar Chart</h3>#}
+{##}
+{#                                <div class="card-tools">#}
+{#                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i#}
+{#                                        class="fas fa-minus"></i>#}
+{#                                    </button>#}
+{#                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i#}
+{#                                        class="fas fa-times"></i></button>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="card-body">#}
+{#                                <div class="chart">#}
+{#                                    <div class="chartjs-size-monitor">#}
+{#                                        <div class="chartjs-size-monitor-expand">#}
+{#                                            <div class=""></div>#}
+{#                                        </div>#}
+{#                                        <div class="chartjs-size-monitor-shrink">#}
+{#                                            <div class=""></div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <canvas id="barChart"#}
+{#                                            style="height: 230px; min-height: 230px; display: block; width: 764px;"#}
+{#                                            width="764" height="230" class="chartjs-render-monitor"></canvas>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- /.card-body -->#}
+{#                        </div>#}
+{#                        <!-- /.card -->#}
+{#                    </div>#}
+{#                    <!-- /.col (MAIN) -->#}
+{#                </div>#}
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
-        <div class="content-wrapper">
-        {% for point in points %}
-          {{ point }}
-          {{ point.a }}
-          {% endfor %}
+{#TODO 图表#}
+{#        <div class="content-wrapper">#}
+{#        {% for point in points %}#}
+{#          {{ point }}#}
+{#          {{ point.a }}#}
+{#          {% endfor %}#}
+
 {#            {% for user in users %}#}
 {#                {{ user }}#}
 {#                {{ user.get_predict_work_count.total_predict_work }}#}
@@ -140,7 +144,8 @@
 {#                {% endfor %}#}
 {#                </br>#}
 {#            {% endfor %}#}
-        </div>
+
+{#        </div>#}
 {% endblock %}
 
 {% block script %}

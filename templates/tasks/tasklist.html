@@ -94,7 +94,7 @@
                         <td style="text-align:center;">{{ task.deadline | date:"Y.m" }}</td>
                         <td style="text-align:center;">{{ task.duty_group }}</td>
                         <td style="text-align:center;">{{ task.principal }}</td>
-                        <td style="text-align:center;">{{ task.leader }}</td>
+                        <td style="text-align:center;">{{ task.leader|default_if_none:"" }}</td>
                         <td><textarea style="overflow:hidden;width:100%;">{{ task.task_note }}</textarea></td>
                       </tr>
                     {% endfor %}

@@ -551,7 +551,7 @@ var Lightbox = (function ($) {
 							image.css('width', '100%');
 
 							$containerForImage.html(image);
-							if (_this4._$modalArrows) _this4._$modalArrows.css('display', ''); // remove display to default to css property
+							if (_this4._$modalArrows) _this4._$modalArrows.css('display', ''); // remove display to default to font.css property
 
 							_this4._resize(img.width, img.height);
 							_this4._toggleLoading(false);

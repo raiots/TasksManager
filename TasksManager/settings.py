@@ -153,7 +153,7 @@ SIMPLEUI_HOME_ICON = 'el el-icon-platform-eleme'
 # https://zhuanlan.zhihu.com/p/113447102
 
 # 指定simpleui默认的主题,指定一个文件名，相对路径就从simpleui的theme目录读取
-SIMPLEUI_DEFAULT_THEME = 'ant.design.css'
+SIMPLEUI_DEFAULT_THEME = 'ant.design.font.css'
 
 SIMPLEUI_CONFIG = {
     'system_keep': False,

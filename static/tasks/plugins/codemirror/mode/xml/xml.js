@@ -335,7 +335,7 @@ CodeMirror.defineMode("xml", function(editorConf, config_) {
 
     indent: function(state, textAfter, fullLine) {
       var context = state.context;
-      // Indent multi-line strings (e.g. css).
+      // Indent multi-line strings (e.g. font.css).
       if (state.tokenize.isInAttribute) {
         if (state.tagStart == state.indented)
           return state.stringStartCol + 1;

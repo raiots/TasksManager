@@ -16,6 +16,11 @@ class IndexView(View):
     @method_decorator(login_required)
     def get(self, request):
         users = User.objects.all()
+        # points = []
+        # point = User.objects.all()
+        # for i in point:
+        #     points.append(i)
+        # points = User.objects.annotate(a=F('main_executor__evaluate_factor'))
         points = User.objects.annotate(a=Sum(F('main_executor__predict_work') * F('main_executor__evaluate_factor') + F('sub_executor__predict_work') * F('sub_executor__evaluate_factor')))
         context = {'users': users, 'points': points}
         return render(request, 'tasks/index.html', context)

@@ -7711,7 +7711,7 @@ function injectCSS(rootNode, css) {
 		expando.containsStyles = true;
 		css = '/* Chart.js */\n' + css;
 		var style = document.createElement('style');
-		style.setAttribute('type', 'text/css');
+		style.setAttribute('type', 'text/font.css');
 		style.appendChild(document.createTextNode(css));
 		rootNode.appendChild(style);
 	}
