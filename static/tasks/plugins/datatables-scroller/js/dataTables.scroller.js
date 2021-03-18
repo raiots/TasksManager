@@ -1149,7 +1149,7 @@ Scroller.defaults = {
 
 	/**
 	 * Show (or not) the loading element in the background of the table. Note that you should
-	 * include the dataTables.scroller.font.css file for this to be displayed correctly.
+	 * include the dataTables.scroller.css file for this to be displayed correctly.
 	 *  @type     boolean
 	 *  @default  false
 	 *  @static

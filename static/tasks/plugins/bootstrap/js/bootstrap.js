@@ -2502,7 +2502,7 @@
 
       if (this._isBodyOverflowing) {
         // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
-        //   while $(DOMNode).font.css('padding-right') returns the calculated value or 0 if not set
+        //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
         var fixedContent = [].slice.call(document.querySelectorAll(SELECTOR_FIXED_CONTENT));
         var stickyContent = [].slice.call(document.querySelectorAll(SELECTOR_STICKY_CONTENT)); // Adjust fixed content padding
 

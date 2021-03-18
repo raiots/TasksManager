@@ -425,7 +425,7 @@ $.extend( FixedHeader.prototype, {
 		var itemDom = this.dom[ item ];
 		var position = this.s.position;
 
-		// It isn't trivial to add a !important font.css attribute...
+		// It isn't trivial to add a !important css attribute...
 		var importantWidth = function (w) {
 			itemDom.floating.attr('style', function(i,s) {
 				return (s || '') + 'width: '+w+'px !important;';

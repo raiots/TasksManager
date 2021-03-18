@@ -2347,7 +2347,7 @@ var TempusDominusBootstrap4 = function ($) {
         self.widget.addClass('float-right');
       } else {
         self.widget.removeClass('float-right');
-      } // find the first parent element that has a relative font.css positioning
+      } // find the first parent element that has a relative css positioning
 
 
       if (parent.css('position') !== 'relative') {

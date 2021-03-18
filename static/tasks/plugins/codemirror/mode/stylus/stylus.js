@@ -391,7 +391,7 @@
 
         if (override == "tag") {
 
-          // tag is a font.css value
+          // tag is a css value
           if (/embed|menu|pre|progress|sub|table/.test(word)) {
             if (wordIsProperty(firstWordOfLine(stream))) {
               override = "atom";
@@ -733,7 +733,7 @@
   // developer.mozilla.org/en-US/docs/Web/HTML/Element
   var tagKeywords_ = ["a","abbr","address","area","article","aside","audio", "b", "base","bdi", "bdo","bgsound","blockquote","body","br","button","canvas","caption","cite", "code","col","colgroup","data","datalist","dd","del","details","dfn","div", "dl","dt","em","embed","fieldset","figcaption","figure","footer","form","h1", "h2","h3","h4","h5","h6","head","header","hgroup","hr","html","i","iframe", "img","input","ins","kbd","keygen","label","legend","li","link","main","map", "mark","marquee","menu","menuitem","meta","meter","nav","nobr","noframes", "noscript","object","ol","optgroup","option","output","p","param","pre", "progress","q","rp","rt","ruby","s","samp","script","section","select", "small","source","span","strong","style","sub","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","tr","track", "u","ul","var","video"];
 
-  // github.com/codemirror/CodeMirror/blob/master/mode/font.css/font.css.js
+  // github.com/codemirror/CodeMirror/blob/master/mode/css/css.js
   // Note, "url-prefix" should precede "url" in order to match correctly in documentTypesRegexp
   var documentTypes_ = ["domain", "regexp", "url-prefix", "url"];
   var mediaTypes_ = ["all","aural","braille","handheld","print","projection","screen","tty","tv","embossed"];
@@ -747,7 +747,7 @@
   var wordOperatorKeywords_ = ["in","and","or","not","is not","is a","is","isnt","defined","if unless"],
       blockKeywords_ = ["for","if","else","unless", "from", "to"],
       commonAtoms_ = ["null","true","false","href","title","type","not-allowed","readonly","disabled"],
-      commonDef_ = ["@font-face", "@keyframes", "@media", "@viewport", "@page", "@host", "@supports", "@block", "@font.css"];
+      commonDef_ = ["@font-face", "@keyframes", "@media", "@viewport", "@page", "@host", "@supports", "@block", "@css"];
 
   var hintWords = tagKeywords_.concat(documentTypes_,mediaTypes_,mediaFeatures_,
                                       propertyKeywords_,nonStandardPropertyKeywords_,

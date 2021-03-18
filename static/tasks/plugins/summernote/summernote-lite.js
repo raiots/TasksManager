@@ -3820,7 +3820,7 @@ var Style_Style = /*#__PURE__*/function () {
      * @method jQueryCSS
      *
      * [workaround] for old jQuery
-     * passing an array of style properties to .font.css()
+     * passing an array of style properties to .css()
      * will result in an object of property-value pairs.
      * (compability with version < 1.9)
      *
@@ -10773,7 +10773,7 @@ external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summe
 /***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-font.css-extract-plugin
+// extracted by mini-css-extract-plugin
 
 /***/ })
 

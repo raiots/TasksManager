@@ -2149,7 +2149,7 @@ $.effects.animateClass = function( value, duration, easing, callback ) {
 			applyClassChange();
 
 			// For each animated element,
-			// clear all font.css properties that were animated
+			// clear all css properties that were animated
 			$.each( arguments, function() {
 				var el = this.el;
 				$.each( this.diff, function( key ) {
@@ -3486,7 +3486,7 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 		}
 	};
 
-	// Scale the font.css box
+	// Scale the css box
 	if ( scale === "box" || scale === "both" ) {
 
 		// Vertical props scaling
@@ -3529,7 +3529,7 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 		hProps = hProps.concat( [ "marginLeft", "marginRight" ] );
 
 		// Only animate children with width attributes specified
-		// TODO: is this right? should we include anything with font.css width specified as well
+		// TODO: is this right? should we include anything with css width specified as well
 		element.find( "*[width]" ).each( function() {
 			var child = $( this ),
 				childOriginal = $.effects.scaledDimensions( child ),
@@ -4309,9 +4309,9 @@ var uniqueId = $.fn.extend( {
 // jscs:enable maximumLineLength
 //>>docs: http://api.jqueryui.com/accordion/
 //>>demos: http://jqueryui.com/accordion/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/accordion.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/accordion.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -4934,9 +4934,9 @@ var safeActiveElement = $.ui.safeActiveElement = function( document ) {
 //>>description: Creates nestable menus.
 //>>docs: http://api.jqueryui.com/menu/
 //>>demos: http://jqueryui.com/menu/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/menu.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/menu.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -5589,9 +5589,9 @@ var widgetsMenu = $.widget( "ui.menu", {
 //>>description: Lists suggested words as the user is typing.
 //>>docs: http://api.jqueryui.com/autocomplete/
 //>>demos: http://jqueryui.com/autocomplete/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/autocomplete.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/autocomplete.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -6253,9 +6253,9 @@ var widgetsAutocomplete = $.ui.autocomplete;
 //>>description: Visually groups form control widgets
 //>>docs: http://api.jqueryui.com/controlgroup/
 //>>demos: http://jqueryui.com/controlgroup/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/controlgroup.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/controlgroup.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 var controlgroupCornerRegex = /ui-corner-([a-z]){2,6}/g;
@@ -6538,10 +6538,10 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 //>>description: Enhances a form with multiple themeable checkboxes or radio buttons.
 //>>docs: http://api.jqueryui.com/checkboxradio/
 //>>demos: http://jqueryui.com/checkboxradio/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/button.font.css
-//>>font.css.structure: ../../themes/base/checkboxradio.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/button.css
+//>>css.structure: ../../themes/base/checkboxradio.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -6808,9 +6808,9 @@ var widgetsCheckboxradio = $.ui.checkboxradio;
 //>>description: Enhances a form with themeable buttons.
 //>>docs: http://api.jqueryui.com/button/
 //>>demos: http://jqueryui.com/button/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/button.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/button.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -7176,9 +7176,9 @@ var widgetsButton = $.ui.button;
 //>>description: Displays a calendar from an input or inline for selecting dates.
 //>>docs: http://api.jqueryui.com/datepicker/
 //>>demos: http://jqueryui.com/datepicker/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/datepicker.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/datepicker.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -9541,7 +9541,7 @@ var safeBlur = $.ui.safeBlur = function( element ) {
 //>>description: Enables dragging functionality for any element.
 //>>docs: http://api.jqueryui.com/draggable/
 //>>demos: http://jqueryui.com/draggable/
-//>>font.css.structure: ../../themes/base/draggable.font.css
+//>>css.structure: ../../themes/base/draggable.css
 
 
 
@@ -9692,7 +9692,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		//Cache the margins of the original element
 		this._cacheMargins();
 
-		//Store the helper's font.css position
+		//Store the helper's css position
 		this.cssPosition = this.helper.css( "position" );
 		this.scrollParent = this.helper.scrollParent( true );
 		this.offsetParent = this.helper.offsetParent();
@@ -10771,9 +10771,9 @@ var widgetsDraggable = $.ui.draggable;
 //>>description: Enables resize functionality for any element.
 //>>docs: http://api.jqueryui.com/resizable/
 //>>demos: http://jqueryui.com/resizable/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/resizable.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/resizable.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -11955,9 +11955,9 @@ var widgetsResizable = $.ui.resizable;
 //>>description: Displays customizable dialog windows.
 //>>docs: http://api.jqueryui.com/dialog/
 //>>demos: http://jqueryui.com/dialog/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/dialog.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/dialog.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -13353,9 +13353,9 @@ var widgetsDroppable = $.ui.droppable;
 // jscs:enable maximumLineLength
 //>>docs: http://api.jqueryui.com/progressbar/
 //>>demos: http://jqueryui.com/progressbar/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/progressbar.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/progressbar.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -13515,7 +13515,7 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 //>>description: Allows groups of elements to be selected with the mouse.
 //>>docs: http://api.jqueryui.com/selectable/
 //>>demos: http://jqueryui.com/selectable/
-//>>font.css.structure: ../../themes/base/selectable.font.css
+//>>css.structure: ../../themes/base/selectable.css
 
 
 
@@ -13812,9 +13812,9 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 // jscs:enable maximumLineLength
 //>>docs: http://api.jqueryui.com/selectmenu/
 //>>demos: http://jqueryui.com/selectmenu/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/selectmenu.font.css, ../../themes/base/button.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/selectmenu.css, ../../themes/base/button.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -14476,9 +14476,9 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 //>>description: Displays a flexible slider with ranges and accessibility via keyboard.
 //>>docs: http://api.jqueryui.com/slider/
 //>>demos: http://jqueryui.com/slider/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/slider.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/slider.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -15212,7 +15212,7 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 //>>description: Enables items in a list to be sorted using the mouse.
 //>>docs: http://api.jqueryui.com/sortable/
 //>>demos: http://jqueryui.com/sortable/
-//>>font.css.structure: ../../themes/base/sortable.font.css
+//>>css.structure: ../../themes/base/sortable.css
 
 
 
@@ -16470,7 +16470,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 				scrollIsRootNode = ( /(html|body)/i ).test( scroll[ 0 ].tagName );
 
 		// This is another very weird special case that only happens for relative elements:
-		// 1. If the font.css position is relative
+		// 1. If the css position is relative
 		// 2. and the scroll parent is the document or similar to the offset parent
 		// we have to refresh the relative offset during the scroll so there are no jumps
 		if ( this.cssPosition === "relative" && !( this.scrollParent[ 0 ] !== this.document[ 0 ] &&
@@ -16748,9 +16748,9 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 //>>description: Displays buttons to easily input numbers via the keyboard or mouse.
 //>>docs: http://api.jqueryui.com/spinner/
 //>>demos: http://jqueryui.com/spinner/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/spinner.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/spinner.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -17306,9 +17306,9 @@ var widgetsSpinner = $.ui.spinner;
 //>>description: Transforms a set of container elements into a tab structure.
 //>>docs: http://api.jqueryui.com/tabs/
 //>>demos: http://jqueryui.com/tabs/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/tabs.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/tabs.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 
@@ -18212,9 +18212,9 @@ var widgetsTabs = $.ui.tabs;
 //>>description: Shows additional information for any element on hover or focus.
 //>>docs: http://api.jqueryui.com/tooltip/
 //>>demos: http://jqueryui.com/tooltip/
-//>>font.css.structure: ../../themes/base/core.font.css
-//>>font.css.structure: ../../themes/base/tooltip.font.css
-//>>font.css.theme: ../../themes/base/theme.font.css
+//>>css.structure: ../../themes/base/core.css
+//>>css.structure: ../../themes/base/tooltip.css
+//>>css.theme: ../../themes/base/theme.css
 
 
 

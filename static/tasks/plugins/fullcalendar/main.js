@@ -12835,7 +12835,7 @@ var FullCalendar = (function (exports) {
                 props.clientWidth !== null // means sizing has stabilized
             ) {
                 var rootEl = this.rootElRef.current;
-                if (rootEl.offsetHeight) { // not hidden by font.css
+                if (rootEl.offsetHeight) { // not hidden by css
                     props.onCoords(new TimeColsSlatsCoords(new PositionCache(this.rootElRef.current, collectSlatEls(this.slatElRefs.currentMap, props.slatMetas), false, true), this.props.dateProfile, props.slatMetas));
                 }
             }

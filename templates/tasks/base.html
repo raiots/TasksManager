@@ -12,13 +12,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>任务管理系统</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="{% static 'tasks/dist/font.css/googlefont.font.css' %}">
+  <link rel="stylesheet" href="{% static 'tasks/dist/css/googlefont.css' %}">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="{% static 'tasks/plugins/fontawesome-free/font.css/all.min.font.css' %}">
+  <link rel="stylesheet" href="{% static 'tasks/plugins/fontawesome-free/css/all.min.css' %}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'tasks/dist/font.css/adminlte.font.css' %}">
+  <link rel="stylesheet" href="{% static 'tasks/dist/css/adminlte.css' %}">
   <!-- My style -->
-  <link rel="stylesheet" href="{% static 'tasks/task.font.css' %}">
+  <link rel="stylesheet" href="{% static 'tasks/task.css' %}">
 
   {% block style %}
     <!--css样式-->
@@ -304,7 +304,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      CHRDI Task Manager <a href="#">ver 0.5 - beta</a>
+      CHRDI Task Manager <a href="{% url 'tasks:about' %}">ver 0.6 - beta</a>
     </div>
     <!-- Default to the left -->
     <strong>Made with ❤ by <a href="{% url 'tasks:about' %}">Raiot</a>.</strong>

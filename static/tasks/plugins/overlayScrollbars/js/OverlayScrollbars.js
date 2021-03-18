@@ -1781,7 +1781,7 @@
 
                         //fix opera bug: scrollbar styles will only appear if overflow value is scroll or auto during the activation of the style.
                         //and set overflow to scroll
-                        //scrollbarDummyElement.font.css(strOverflow, strHidden).hide().font.css(strOverflow, strScroll).show();
+                        //scrollbarDummyElement.css(strOverflow, strHidden).hide().css(strOverflow, strScroll).show();
                         //return (scrollbarDummyElement0[LEXICON.oH] - scrollbarDummyElement0[LEXICON.cH]) === 0 && (scrollbarDummyElement0[LEXICON.oW] - scrollbarDummyElement0[LEXICON.cW]) === 0;
 
                         return result;
@@ -2424,7 +2424,7 @@
                                          var expandChildCSS = {};
                                          expandChildCSS[_strWidth] = sizeResetWidth;
                                          expandChildCSS[_strHeight] = sizeResetHeight;
-                                         expandElementChild.font.css(expandChildCSS);
+                                         expandElementChild.css(expandChildCSS);
 
 
                                          expandElement[_strScrollLeft](sizeResetWidth)[_strScrollTop](sizeResetHeight);
@@ -2577,12 +2577,12 @@
                             }
                             else {
                                 targetElement = targetElement.children(_strDot + _classNameResizeObserverElement).eq(0);
-                                var w = targetElement.font.css(_strWidth);
-                                var h = targetElement.font.css(_strHeight);
-                                var font.css = {};
-                                font.css[_strWidth] = w;
-                                font.css[_strHeight] = h;
-                                targetElement.font.css(font.css);
+                                var w = targetElement.css(_strWidth);
+                                var h = targetElement.css(_strHeight);
+                                var css = {};
+                                css[_strWidth] = w;
+                                css[_strHeight] = h;
+                                targetElement.css(css);
                             }
                         }
                         else {
@@ -2591,10 +2591,10 @@
                                 element[_strResizeObserverProperty].observe(element);
                             }
                             else {
-                                var font.css = { };
-                                font.css[_strHeight] = _strEmpty;
-                                font.css[_strWidth] = _strEmpty;
-                                targetElement.children(_strDot + _classNameResizeObserverElement).eq(0).font.css(font.css);
+                                var css = { };
+                                css[_strHeight] = _strEmpty;
+                                css[_strWidth] = _strEmpty;
+                                targetElement.children(_strDot + _classNameResizeObserverElement).eq(0).css(css);
                             }
                         }
                     }
@@ -3481,7 +3481,7 @@
                     //detect margin:
                     var margin = getTopRightBottomLeftHost(_strMarginMinus);
 
-                    //vars to apply correct font.css
+                    //vars to apply correct css
                     var contentElementCSS = {};
                     var contentGlueElementCSS = {};
 
@@ -4940,7 +4940,7 @@
                         handleCSS[scrollbarVars._left_top] = handleOffset;
 
 
-                    //only apply font.css if offset has changed and overflow exists.
+                    //only apply css if offset has changed and overflow exists.
                     if (!nativeOverlayScrollbarsAreActive()) {
                         scrollbarVars._handle.css(handleCSS);
 
@@ -5134,9 +5134,9 @@
                 }
 
                 /**
-                 * Sets the "top, right, bottom, left" properties, with a given prefix, of the given font.css object.
-                 * @param targetCSSObject The font.css object to which the values shall be applied.
-                 * @param prefix The prefix of the "top, right, bottom, left" font.css properties. (example: 'padding-' is a valid prefix)
+                 * Sets the "top, right, bottom, left" properties, with a given prefix, of the given css object.
+                 * @param targetCSSObject The css object to which the values shall be applied.
+                 * @param prefix The prefix of the "top, right, bottom, left" css properties. (example: 'padding-' is a valid prefix)
                  * @param values A array of values which shall be applied to the "top, right, bottom, left" -properties. The array order is [top, right, bottom, left].
                  * If this argument is undefined the value '' (empty string) will be applied to all properties.
                  */
@@ -5152,8 +5152,8 @@
 
                 /**
                  * Gets the "top, right, bottom, left" CSS properties of the CSS property with the given prefix from the host element.
-                 * @param prefix The prefix of the "top, right, bottom, left" font.css properties. (example: 'padding-' is a valid prefix)
-                 * @param suffix The suffix of the "top, right, bottom, left" font.css properties. (example: 'border-' is a valid prefix with '-width' is a valid suffix)
+                 * @param prefix The prefix of the "top, right, bottom, left" css properties. (example: 'padding-' is a valid prefix)
+                 * @param suffix The suffix of the "top, right, bottom, left" css properties. (example: 'border-' is a valid prefix with '-width' is a valid suffix)
                  * @param zeroX True if the x axis shall be 0.
                  * @param zeroY True if the y axis shall be 0.
                  * @returns {{}} The object which contains the numbers of the read CSS properties.
@@ -5741,7 +5741,7 @@
                  *    'nearest' The element will be docked to the nearest edge(s).
                  *
                  *    Possible margin settings are: -- The actual margin of the element wont be affect, this option affects only the final scroll offset.
-                 *    [BOOLEAN]                                         If true the font.css margin of the element will be used, if false no margin will be used.
+                 *    [BOOLEAN]                                         If true the css margin of the element will be used, if false no margin will be used.
                  *    [NUMBER]                                          The margin will be used for all edges.
                  *
                  * @param duration The duration of the scroll animation, OR a jQuery animation configuration object.
