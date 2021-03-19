@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in (v2)</title>
+  <title>任务管理系统</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{% static 'tasks/dist/css/googlefont.css' %}">
@@ -21,7 +21,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>任务</b>管理系统</a>
+      <a href="{% url 'tasks:index' %}" class="h1"><b>任务</b>管理系统</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">登录以继续</p>
@@ -68,9 +68,9 @@
         {% csrf_token %}
       </form>
 
-      <p class="mb-1">
-        <a href="forgot-password.html">无法登录？</a>
-      </p>
+{#      <p class="mb-1">#}
+{#        <a href="#">无法登录？</a>#}
+{#      </p>#}
     </div>
     <!-- /.card-body -->
   </div>
