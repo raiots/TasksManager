@@ -82,7 +82,7 @@
                         <td style="text-align: center">{{ todo.deadline | date:"m月d日" }}</td>
                         <td style="width: 160px"><textarea style="width:100%;overflow:hidden">{{ todo.todo_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.duty_group }}</td>
-                        <td style="text-align: center">{{ todo.main_executor.all|join:", " }}</td>
+                        <td style="text-align: center">{{ todo.main_executor }}</td>
                         <td style="text-align: center">{{ todo.sub_executor.all|join:", " }}</td>
                         <td style="text-align:center;">{{ todo.predict_work }}</td>
                         <td style="text-align:center;">{{ todo.evaluate_factor }}</td>

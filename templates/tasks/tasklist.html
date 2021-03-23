@@ -86,10 +86,10 @@
                           <textarea class="text-none-border" style="background-color: #F5CCB0">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'2'|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #F7E4A8; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #F7E4A8">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'3'|safe }}{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #F7E4A8">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'3'|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #83E1E3; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %} {{ todo|quarter_cate:'4'|safe }}{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'4'|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="text-align:center;">{{ task.deadline | date:"Y.m" }}</td>
                         <td style="text-align:center;">{{ task.duty_group }}</td>
