@@ -39,6 +39,7 @@ class TaskAdmin(admin.ModelAdmin):
     #             pass
     #             # kwargs["queryset"] = models.Task.objects.get(id=2).related_task
 
+    # 所属单位默认为访问用户的部门
     def get_changeform_initial_data(self, request):
         return {'department': request.user.department}
 
@@ -47,6 +48,14 @@ class TaskAdmin(admin.ModelAdmin):
         if db_field.name == 'task_property':
             kwargs["queryset"] = TaskProperty.objects.filter(own_department=request.user.department)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    # 仅显示当前部门的年度任务，除非为超管
+    def get_queryset(self, request):
+        qs = super(TaskAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(department=request.user.department)
 
     list_display = (
         'task_property', 'task_id', 'task_topic', 'task_origin', 'aim_value', 'deadline', 'duty_group', 'principal',
@@ -83,13 +92,21 @@ class TodoAdmin(admin.ModelAdmin):
             kwargs["queryset"] = User.objects.filter(department=request.user.department)
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
+    # 仅显示当前部门的工作包，除非为超管
+    def get_queryset(self, request):
+        qs = super(TodoAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(related_task__department=request.user.department)
+
     fieldsets = [
         (None, {
             'fields': [
                 'related_task', 'todo_topic', 'todo_note', 'deadline', 'duty_group', 'main_executor', 'sub_executor',
                 'predict_work', 'evaluate_factor',
             ],
-            'description': []
+            'description': 'aaa'
         }),
 
         (None, {
