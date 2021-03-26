@@ -15,7 +15,7 @@ from apps.users.models import User
 class IndexView(View):
     @method_decorator(login_required)
     def get(self, request):
-        users = User.objects.all()
+        users = User.objects.filter(department=request.user.department)
         # points = []
         # point = User.objects.all()
         # for i in point:
@@ -39,7 +39,8 @@ class TodoListView(View):
 class GroupTodoList(View):
     @method_decorator(login_required)
     def get(self, request, year=timezone.now().year, month=timezone.now().month):
-        group_todo = Todo.objects.filter(main_executor__department=request.user.department, deadline__year=year, deadline__month=month)
+        group_todo = Todo.objects.filter(main_executor__department=request.user.department, deadline__year=year,
+                                         deadline__month=month).order_by('related_task_id', 'deadline')
         date = str(year) + '年' + str(month) + '月'
         context = {'group_todo': group_todo, 'date': date}
         return render(request, 'tasks/group_todolist.html', context)
@@ -85,7 +86,7 @@ class TodoEntryView(View):
         form = TodoForm(instance=todo_detail, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('tasks:index')
+            return redirect('tasks:todolist')
             # return redirect('tasks:todo_detail', pk=pk)
 
 

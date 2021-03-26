@@ -4,10 +4,23 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from . import models
-from apps.users.models import TaskProperty
+from apps.users.models import TaskProperty, User
 
 
 class TodoInline(admin.StackedInline):
+
+    # 在Inline中同样筛选仅本部门的承办人、协办人
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'related_task':
+            kwargs["queryset"] = models.Task.objects.filter(department=request.user.department)
+        elif db_field.name == 'main_executor':
+            kwargs["queryset"] = User.objects.filter(department=request.user.department)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == 'sub_executor':
+            kwargs["queryset"] = User.objects.filter(department=request.user.department)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
     model = models.Todo
     extra = 0
     # classes = ['collapse']
@@ -57,18 +70,26 @@ class TaskAdmin(admin.ModelAdmin):
 
 class TodoAdmin(admin.ModelAdmin):
 
-    # 工作包页面仅显示所属本部门的年度任务
+    # 工作包页面仅显示所属本部门的年度任务、承办人、协办人
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'related_task':
             kwargs["queryset"] = models.Task.objects.filter(department=request.user.department)
+        elif db_field.name == 'main_executor':
+            kwargs["queryset"] = User.objects.filter(department=request.user.department)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == 'sub_executor':
+            kwargs["queryset"] = User.objects.filter(department=request.user.department)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
 
     fieldsets = [
         (None, {
             'fields': [
                 'related_task', 'todo_topic', 'todo_note', 'deadline', 'duty_group', 'main_executor', 'sub_executor',
                 'predict_work', 'evaluate_factor',
-            ]
+            ],
+            'description': []
         }),
 
         (None, {
@@ -96,7 +117,7 @@ class TodoAdmin(admin.ModelAdmin):
     list_display_links = ('todo_topic', 'deadline', )
     date_hierarchy = 'deadline'
     list_per_page = 70  # 目的是取消自动分页，好像有bug
-    raw_id_fields = ("main_executor", "sub_executor")
+    # raw_id_fields = ("sub_executor",)
     search_fields = ('todo_topic',)
     ordering = ('related_task', )
 
@@ -120,11 +141,7 @@ class TodoAdmin(admin.ModelAdmin):
         return obj.related_task
     lined_task.short_description = '任务名称'
 
-# TODO 增加承办人与协办人只显示本部门人员
 # TODO 任务编辑界面按部门显示
-# TODO 修复工作事项显示不下自动分页，取消自动分页
-
-
 
 
 admin.site.register(models.Task, TaskAdmin)
