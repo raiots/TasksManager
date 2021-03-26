@@ -29,6 +29,7 @@ class TaskAdmin(admin.ModelAdmin):
     def get_changeform_initial_data(self, request):
         return {'department': request.user.department}
 
+    # 年度任务编辑界面仅显示本部门的任务属性
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'task_property':
             kwargs["queryset"] = TaskProperty.objects.filter(own_department=request.user.department)
@@ -55,6 +56,8 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 class TodoAdmin(admin.ModelAdmin):
+
+    # 工作包页面仅显示所属本部门的年度任务
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'related_task':
             kwargs["queryset"] = models.Task.objects.filter(department=request.user.department)
@@ -63,8 +66,8 @@ class TodoAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {
             'fields': [
-                'related_task', 'todo_topic', 'todo_note', 'deadline', 'duty_group', 'main_executor', 'sub_executor', 'predict_work',
-                'evaluate_factor',
+                'related_task', 'todo_topic', 'todo_note', 'deadline', 'duty_group', 'main_executor', 'sub_executor',
+                'predict_work', 'evaluate_factor',
             ]
         }),
 
@@ -75,9 +78,10 @@ class TodoAdmin(admin.ModelAdmin):
     list_display = (
         'todo_topic',
         'deadline',
+        'todo_note',
         'task_id',
+        'task_origin',
         'lined_task',
-        # 'task_origin',
         # 'duty_department',
         'duty_group',
         'main_executor',
@@ -91,7 +95,7 @@ class TodoAdmin(admin.ModelAdmin):
     list_filter = ('deadline',)
     list_display_links = ('todo_topic', 'deadline', )
     date_hierarchy = 'deadline'
-    list_per_page = 20
+    list_per_page = 70  # 目的是取消自动分页，好像有bug
     raw_id_fields = ("main_executor", "sub_executor")
     search_fields = ('todo_topic',)
     ordering = ('related_task', )
@@ -116,7 +120,9 @@ class TodoAdmin(admin.ModelAdmin):
         return obj.related_task
     lined_task.short_description = '任务名称'
 
-
+# TODO 增加承办人与协办人只显示本部门人员
+# TODO 任务编辑界面按部门显示
+# TODO 修复工作事项显示不下自动分页，取消自动分页
 
 
 

@@ -12,3 +12,5 @@ class TodoForm(forms.ModelForm):
         fields = ['maturity', 'real_work', 'complete_note']
         labels ={'text': ''}
         widgets = {'rows': '3'}
+
+        # TODO 数据不可为空

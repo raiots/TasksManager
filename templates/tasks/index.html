@@ -85,48 +85,50 @@
 {#          </div>#}
           <!-- /.col -->
         </div>
-{#                <div class="row">#}
-{#                    <div class="col-md-12">#}
-{#                        <!-- BAR CHART -->#}
-{#                        <div class="card card-gray">#}
-{#                            <div class="card-header">#}
-{#                                <h3 class="card-title">Bar Chart</h3>#}
-{##}
-{#                                <div class="card-tools">#}
-{#                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i#}
-{#                                        class="fas fa-minus"></i>#}
-{#                                    </button>#}
-{#                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i#}
-{#                                        class="fas fa-times"></i></button>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="card-body">#}
-{#                                <div class="chart">#}
-{#                                    <div class="chartjs-size-monitor">#}
-{#                                        <div class="chartjs-size-monitor-expand">#}
-{#                                            <div class=""></div>#}
-{#                                        </div>#}
-{#                                        <div class="chartjs-size-monitor-shrink">#}
-{#                                            <div class=""></div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                    <canvas id="barChart"#}
-{#                                            style="height: 230px; min-height: 230px; display: block; width: 764px;"#}
-{#                                            width="764" height="230" class="chartjs-render-monitor"></canvas>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <!-- /.card-body -->#}
-{#                        </div>#}
-{#                        <!-- /.card -->#}
-{#                    </div>#}
-{#                    <!-- /.col (MAIN) -->#}
-{#                </div>#}
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BAR CHART -->
+                        <div class="card card-gray">
+                            <div class="card-header">
+                                <h3 class="card-title">部门工作统计表</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                        class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                        class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- 工作统计表格 -->
+                            <div class="card-body">
+                                <div class="chart">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <canvas id="barChart"
+                                            style="height: 230px; min-height: 230px; display: block; width: 764px;"
+                                            width="764" height="230" class="chartjs-render-monitor"></canvas>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col (MAIN) -->
+                </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
-{#TODO 图表#}
+
 {#        <div class="content-wrapper">#}
 {#        {% for point in points %}#}
 {#          {{ point }}#}
@@ -161,7 +163,7 @@
               labels  : [{% for user in users %}'{{ user }}', {% endfor %}],
               datasets: [
                 {
-                  label               : 'Digital Goods',
+                  label               : '承办任务',
                   backgroundColor     : 'rgba(60,141,188,0.9)',
                   borderColor         : 'rgba(60,141,188,0.8)',
                   pointRadius          : false,
@@ -169,10 +171,10 @@
                   pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data                : [28, 48, 40, 19, 86, 27, 90]
+                  data                : [{% for user in users %}'{{ user.main_executor.count }}', {% endfor %}]
                 },
                 {
-                  label               : 'Electronics',
+                  label               : '协办任务',
                   backgroundColor     : 'rgba(210, 214, 222, 1)',
                   borderColor         : 'rgba(210, 214, 222, 1)',
                   pointRadius         : false,
@@ -180,7 +182,7 @@
                   pointStrokeColor    : '#c1c7d1',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(220,220,220,1)',
-                  data                : [65, 59, 80, 81, 56, 55, 40]
+                  data                : [{% for user in users %}'{{ user.sub_executor.count }}', {% endfor %}]
                 },
               ]
     }
