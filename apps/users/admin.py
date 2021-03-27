@@ -23,13 +23,23 @@ class MyUserAdmin(UserAdmin):
 class MyGroupAdmin(GroupAdmin):
     pass
 
+
 class DepartmentAdmin(admin.ModelAdmin):
     pass
+
 
 class TaskPropertyAdmin(admin.ModelAdmin):
     list_display = (
         'task_property', 'own_department'
     )
+
+    def get_queryset(self, request):
+        qs = super(TaskPropertyAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(own_department=request.user.department)
+
 
 class QualityMarkAdmin(admin.ModelAdmin):
     list_display = (
@@ -40,9 +50,27 @@ class QualityMarkAdmin(admin.ModelAdmin):
         return self.mark_value
     mark_value.short_description = 'ss'
 
+    # # 仅显示当前部门的任务属性，除非为超管
+    # def get_queryset(self, request):
+    #     qs = super(QualityMarkAdmin, self).get_queryset(request)
+    #     if request.user.is_superuser:
+    #         return qs
+    #     else:
+    #         return qs.filter(department=request.user.department)
+
+
+class MarkValueAdmin(admin.ModelAdmin):
+    # def get_queryset(self, request):
+    #     qs = super(MarkValueAdmin, self).get_queryset(request)
+    #     if request.user.is_superuser:
+    #         return qs
+    #     else:
+    #         return qs.filter(department=request.user.department)
+    pass
+
 admin.site.register(models.User, MyUserAdmin)
 admin.site.register(models.MyGroup, MyGroupAdmin)
-admin.site.register(models.MarkValue)
+admin.site.register(models.MarkValue, MarkValueAdmin)
 admin.site.register(models.Department)
 admin.site.register(models.QualityMark, QualityMarkAdmin)
 admin.site.register(models.TaskProperty, TaskPropertyAdmin)

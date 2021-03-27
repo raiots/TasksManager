@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'apps.users',
     'apps.tasks',
 ]
@@ -135,6 +136,8 @@ LOGIN_REDIRECT_URL = '/'
 # 自定义用户模型
 AUTH_USER_MODEL = 'users.User'
 
+# 它确定库是否会在数据导入中使用数据库事务，以确保安全。
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # SimpleUI 配置
 

@@ -49,7 +49,7 @@ class GroupTodoList(View):
 class TaskListView(View):
     @method_decorator(login_required)
     def get(self, request):
-        tasks = Task.objects.filter().order_by('task_id')
+        tasks = Task.objects.filter(department=request.user.department).order_by('task_id')
         context = {'tasks': tasks}
         return render(request, 'tasks/tasklist.html', context)
 
