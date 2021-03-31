@@ -153,7 +153,7 @@ class TodoAdmin(ImportExportModelAdmin):
     list_filter = ('deadline',)
     list_display_links = ('todo_topic', 'deadline', )
     date_hierarchy = 'deadline'
-    list_per_page = 5  # 目的是取消自动分页，好像有bug
+    list_per_page = 70  # 目的是取消自动分页，好像有bug
     # raw_id_fields = ("sub_executor",)
     search_fields = ('todo_topic',)
     ordering = ('related_task', )
