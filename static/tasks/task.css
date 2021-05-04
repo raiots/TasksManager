@@ -13,3 +13,8 @@
     text-align: center;
     vertical-align: middle;
 }
+
+.col-xs-1-5 {
+    width: 20%;
+    float: left;
+}

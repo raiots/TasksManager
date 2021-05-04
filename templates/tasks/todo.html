@@ -37,11 +37,15 @@
                 <dl class="row">
                   <dt class="col-sm-4">工作事项</dt>
                   <dd class="col-sm-8">{{ todo_detail.todo_topic }}</dd>
-                  <dt class="col-sm-4">交付物</dt>
-                  <dd class="col-sm-8">{{ todo_detail.todo_note }}</dd>
                   <dt class="col-sm-4">完成时间</dt>
                   <dd class="col-sm-8">{{ todo_detail.deadline }}</dd>
 {#                  <dd class="col-sm-8 offset-sm-4">Donec id elit non mi porta gravida at eget metus.</dd>#}
+                  <dt class="col-sm-4">交付物</dt>
+                  <dd class="col-sm-8">{{ todo_detail.todo_note }}</dd>
+                  <dt class="col-sm-4">任务编号</dt>
+                  <dd class="col-sm-8">{{ todo_detail.task_id }}</dd>
+                  <dt class="col-sm-4">任务来源</dt>
+                  <dd class="col-sm-8">{{ todo_detail.task_origin }}</dd>
                   <dt class="col-sm-4">责任单位</dt>
                   <dd class="col-sm-8">{{ todo_detail.duty_group }}</dd>
                   <dt class="col-sm-4">承/督办人</dt>
@@ -50,6 +54,12 @@
                   <dd class="col-sm-8">{{ todo_detail.sub_executor.all|join:', ' }}</dd>
                   <dt class="col-sm-4">预计工作量</dt>
                   <dd class="col-sm-8">{{ todo_detail.predict_work }}</dd>
+                  <dt class="col-sm-4">折算系数</dt>
+                  <dd class="col-sm-8">{{ todo_detail.evaluate_factor }}</dd>
+                  <dt class="col-sm-4">实际工作量</dt>
+                  <dd class="col-sm-8">{{ todo_detail.real_work }}</dd>
+                  <dt class="col-sm-4">成熟度</dt>
+                  <dd class="col-sm-8">{{ todo_detail.maturity }}</dd>
                 </dl>
               </div>
               <!-- /.card-body -->

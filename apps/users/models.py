@@ -9,7 +9,7 @@ from django.db.models import Avg, Sum, F, Value
 class User(AbstractUser):
     real_name = models.CharField(max_length=150, verbose_name='姓名')
     staff_id = models.CharField(max_length=150, verbose_name='工号')
-    department = models.ForeignKey('Department', on_delete=models.SET_NULL, null=True, blank=True)
+    department = models.ForeignKey('Department', related_name='member', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name = '用户'
@@ -44,6 +44,10 @@ class Department(models.Model):
     class Meta:
         verbose_name = '部门'
         verbose_name_plural = '部门'
+
+    @property
+    def get_user_number(self):
+        return self.member.count()
 
 
 class MarkValue(models.Model):

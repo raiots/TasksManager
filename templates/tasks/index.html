@@ -8,12 +8,19 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>总览</h1>
+                        <h1>总览 ({{ date }}) </h1>
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active"><a href="#">主页</a></li>
-                        </ol>
+{#                        <ol class="breadcrumb float-sm-right">#}
+{#                            <li class="breadcrumb-item active"><a href="#">主页</a></li>#}
+{#                        </ol>#}
+                        <br>
+                        {% load taskfilter %}
+                        <ul class="pagination float-md-right">
+                            <li class="page-item"><a class="page-link" href="/{{ date|last_month }}">«</a></li>
+                            <li class="page-item"><a class="page-link"> {{ date|this_month }}月 </a></li>
+                            <li class="page-item"><a class="page-link" href="/{{ date|next_month }}">»</a></li>
+                        </ul>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -23,14 +30,13 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                  <div class="col-12 col-sm-6 col-md-3">
+                  <div class="col">
                     <div class="info-box">
-                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-tasks"></i></span>
-
+                      <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tasks"></i></span>
                       <div class="info-box-content">
-                        <span class="info-box-text">承办任务数</span>
+                        <span class="info-box-text">部门总任务数</span>
                         <span class="info-box-number">
-                          {{ request.user.main_executor.count }}
+                            {{ department.count|floatformat:'0'|default_if_none:'0' }}
                           <small>个</small>
                         </span>
                       </div>
@@ -38,22 +44,173 @@
                     </div>
                     <!-- /.info-box -->
                   </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tasks"></i></span>
+                    <!-- /.col -->
+                  <div class="col">
+                    <div class="info-box mb-3">
+                      <div class="info-box-content">
+                        <span class="info-box-text">部门预计总工作量</span>
+                        <span class="info-box-number">
+                            {{ department.pre_total|default_if_none:'0'|floatformat:'1' }}
+                        <small></small>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col">
+                    <div class="info-box mb-3">
+                      <div class="info-box-content">
+                        <span class="info-box-text">部门实际总工作量</span>
+                        <span class="info-box-number">
+                         {{ department.real_total|default_if_none:'0'|floatformat:'1' }}
+                        <small></small>
+                        </span>
+                      </div>
 
-              <div class="info-box-content">
-                <span class="info-box-text">协办任务数</span>
-                <span class="info-box-number">{{ user.sub_executor.count }}
-                <small>个</small>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col">
+                    <div class="info-box mb-3">
+                      <div class="info-box-content">
+                        <span class="info-box-text">部门预计平均工作量</span>
+                        <span class="info-box-number">
+                         {{ department.pre_avg|default_if_none:'0'|floatformat:'1' }}
+                        <small></small>
+                        </span>
+                      </div>
+
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col">
+                    <div class="info-box mb-3">
+                      <div class="info-box-content">
+                        <span class="info-box-text">部门实际平均工作量</span>
+                        <span class="info-box-number">
+                            {{ department.real_avg|default_if_none:'0'|floatformat:'1' }}
+                        <small></small>
+                        </span>
+                      </div>
+
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+{#          <div class="col-12 col-sm-6 col-md-3">#}
+{#            <div class="info-box mb-3">#}
+{#              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>#}
+{##}
+{#              <div class="info-box-content">#}
+{#                <span class="info-box-text">Sales</span>#}
+{#                <span class="info-box-number">760</span>#}
+{#              </div>#}
+{#              <!-- /.info-box-content -->#}
+{#            </div>#}
+{#            <!-- /.info-box -->#}
+{#          </div>#}
+{#          <!-- /.col -->#}
+{#          <div class="col-12 col-sm-6 col-md-3">#}
+{#            <div class="info-box mb-3">#}
+{#              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>#}
+{##}
+{#              <div class="info-box-content">#}
+{#                <span class="info-box-text">New Members</span>#}
+{#                <span class="info-box-number">2,000</span>#}
+{#              </div>#}
+{#              <!-- /.info-box-content -->#}
+{#            </div>#}
+{#            <!-- /.info-box -->#}
+{#          </div>#}
           <!-- /.col -->
+        </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-tasks"></i></span>
+
+                      <div class="info-box-content">
+                          <span class="info-box-text"><b>个人任务数据统计:</b></span>
+{#                        <span class="info-box-number">#}
+{#                            {% for user in current_user %}{{ user.main_executor_count }}{% endfor %}#}
+{#                          <small>个</small>#}
+{#                        </span>#}
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <div class="col">
+                    <div class="info-box">
+{#                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-tasks"></i></span>#}
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">承办任务数</span>
+                        <span class="info-box-number">
+                            {% for user in current_user %}{{ user.main_executor_count }}{% endfor %}
+                          <small>个</small>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                    <!-- /.col -->
+                  <div class="col">
+                    <div class="info-box mb-3">
+{#                      <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tasks"></i></span>#}
+
+                      <div class="info-box-content">
+                        <span class="info-box-text">协办任务数</span>
+                        <span class="info-box-number">
+                            {% for user in current_user %}{{ user.sub_executor_count }}{% endfor %}
+                        <small>个</small>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col">
+                    <div class="info-box mb-3">
+                      <div class="info-box-content">
+                        <span class="info-box-text">预计工作量</span>
+                        <span class="info-box-number">
+                            {% for user in current_user %}{{ user.pre_credit|default_if_none:'0' }}{% endfor %}
+                        <small></small>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col">
+                    <div class="info-box mb-3">
+                      <div class="info-box-content">
+                        <span class="info-box-text">实际工作量</span>
+                        <span class="info-box-number">
+                            {% for user in current_user %}{{ user.real_credit|default_if_none:'0' }}{% endfor %}
+                        <small></small>
+                        </span>
+                      </div>
+                      <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
 
           <!-- fix for small devices only -->
           <div class="clearfix hidden-md-up"></div>
@@ -124,17 +281,65 @@
                     <!-- /.col (MAIN) -->
                 </div>
                 <!-- /.row -->
+                <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">部门工作统计表</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                          <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">姓名</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">承办任务数</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">协办任务数</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">预计工作量</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">实际工作量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users_data.values %}
+                                <tr role="row" class="odd">
+                                  <td class="sorting_1">{{ user.real_name }}</td>
+                                  <td>{{ user.main_executor_count}}</td>
+                                  <td>{{ user.sub_executor_count}}</td>
+                                  <td>{{ user.pre_credit|floatformat:'1' }}</td>
+                                  <td>{{ user.real_credit|floatformat:'1' }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+{#                            <tfoot>#}
+{#                            <tr><th rowspan="1" colspan="1">Rendering engine</th><th rowspan="1" colspan="1">Browser</th><th rowspan="1" colspan="1">Platform(s)</th><th rowspan="1" colspan="1">Engine version</th><th rowspan="1" colspan="1">CSS grade</th></tr>#}
+{#                            </tfoot>#}
+                          </table></div></div>
+                          </div>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
 
 {#        <div class="content-wrapper">#}
+{#            {{ main_points }}#}
+{#            <br>#}
+{#            {{ sub_points }}#}
+{#            <br>#}
+{#            {{ points }}#}
+{#            {{ points.3.credit }}#}
+{#            {% for point in points.values %}'{{ point }}', {% endfor %}#}
 {#        {% for point in points %}#}
 {#          {{ point }}#}
-{#          {{ point.a }}#}
 {#          {% endfor %}#}
-
+{##}
 {#            {% for user in users %}#}
 {#                {{ user }}#}
 {#                {{ user.get_predict_work_count.total_predict_work }}#}
@@ -146,7 +351,7 @@
 {#                {% endfor %}#}
 {#                </br>#}
 {#            {% endfor %}#}
-
+{##}
 {#        </div>#}
 {% endblock %}
 
@@ -160,29 +365,51 @@
          * Here we will create a few charts using ChartJS
          */
           var areaChartData = {
-              labels  : [{% for user in users %}'{{ user }}', {% endfor %}],
+              labels  : [{% for user in users_data.values %}'{{ user.real_name }}', {% endfor %}],
               datasets: [
                 {
+                  label               : '协办任务',
+                  backgroundColor     : 'rgba(114,140,212,1)',
+                  borderColor         : 'rgba(114,140,212,1)',
+                  pointRadius         : false,
+                  pointColor          : 'rgba(114,140,212,1)',
+                  pointStrokeColor    : '#c1c7d1',
+                  pointHighlightFill  : '#fff',
+                  pointHighlightStroke: 'rgba(220,220,220,1)',
+                  data                : [{% for user in users_data.values %}'{{ user.sub_executor_count }}', {% endfor %}]
+                },
+                {
                   label               : '承办任务',
-                  backgroundColor     : 'rgba(60,141,188,0.9)',
-                  borderColor         : 'rgba(60,141,188,0.8)',
+                  backgroundColor     : 'rgba(23,162,184,0.9)',
+                  borderColor         : 'rgba(100,98,204,0.8)',
                   pointRadius          : false,
                   pointColor          : '#3b8bba',
                   pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data                : [{% for user in users %}'{{ user.main_executor.count }}', {% endfor %}]
+                  data                : [{% for user in users_data.values %}'{{ user.main_executor_count }}', {% endfor %}]
                 },
-                {
-                  label               : '协办任务',
-                  backgroundColor     : 'rgba(210, 214, 222, 1)',
-                  borderColor         : 'rgba(210, 214, 222, 1)',
-                  pointRadius         : false,
-                  pointColor          : 'rgba(210, 214, 222, 1)',
-                  pointStrokeColor    : '#c1c7d1',
+                  {
+                  label               : '预计工作量',
+                  backgroundColor     : 'rgba(210, 214, 222,1)',
+                  borderColor         : 'rgba(210, 214, 222,1)',
+                  pointRadius          : false,
+                  pointColor          : '#3b8bba',
+                  pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
-                  pointHighlightStroke: 'rgba(220,220,220,1)',
-                  data                : [{% for user in users %}'{{ user.sub_executor.count }}', {% endfor %}]
+                  pointHighlightStroke: 'rgba(60,141,188,1)',
+                  data                : [{% for user in users_data.values %}'{{ user.pre_credit|floatformat:'1' }}', {% endfor %}]
+                },
+                                {
+                  label               : '工作量',
+                  backgroundColor     : 'rgba(253,199,101,0.9)',
+                  borderColor         : 'rgba(253,199,101,0.8)',
+                  pointRadius          : false,
+                  pointColor          : '#3b8bba',
+                  pointStrokeColor    : 'rgba(60,141,188,1)',
+                  pointHighlightFill  : '#fff',
+                  pointHighlightStroke: 'rgba(60,141,188,1)',
+                  data                : [{% for user in users_data.values %}'{{ user.real_credit|floatformat:'1' }}', {% endfor %}]
                 },
               ]
     }

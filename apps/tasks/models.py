@@ -1,4 +1,8 @@
+import time
+
 from django.db import models
+from django.http import request
+
 from apps.users.models import User, MyGroup, QualityMark, TaskProperty, Department
 
 
@@ -18,8 +22,9 @@ class Todo(models.Model):
     main_executor = models.ForeignKey(User, related_name='main_executor', on_delete=models.CASCADE,
                                       verbose_name='承/督办人', blank=True, null=True)
     sub_executor = models.ManyToManyField(User, related_name='sub_executor', verbose_name='协办人', blank=True)
+    sub_executor_count = models.CharField('协办人数', max_length=32)
     related_task = models.ForeignKey('Task', related_name='related_task', on_delete=models.CASCADE, verbose_name='年度任务')
-    predict_work = models.DecimalField('预计工作量', max_digits=5, decimal_places=1, blank=True, null=True)
+    predict_work = models.DecimalField('预计工作量', default=0, max_digits=5, decimal_places=1, blank=False)
     evaluate_factor = models.DecimalField('折算系数', max_digits=5, decimal_places=1, blank=True, default='1')
     maturity = models.CharField(
         verbose_name='成熟度',
@@ -28,17 +33,17 @@ class Todo(models.Model):
             ('0%', '0%'),
             ('10%', '10%'),
             ('50%', '50%'),
-            ('70%', '70%'),
             ('90%', '90%'),
             ('100%', '100%')
         ),
         blank=True,
         default='0%',
     )
-    real_work = models.DecimalField('实际工作量', max_digits=5, decimal_places=1, blank=True, null=True)
+    real_work = models.DecimalField('实际工作量', default=0, max_digits=5, decimal_places=1, blank=False)
     complete_note = models.TextField('完成情况说明', max_length=150, blank=True)
     quality_mark = models.ForeignKey('users.QualityMark', on_delete=models.SET_NULL, blank=True, null=True,
                                      verbose_name='质量评价')
+    attachment = models.FileField('交付物查看', blank=True)
 
     def __str__(self):
         date = str(self.deadline)
@@ -49,6 +54,13 @@ class Todo(models.Model):
         ordering = ['deadline']
         verbose_name = '工作包'
         verbose_name_plural = '工作包'
+
+    # def save(self, *args, **kwargs):
+    #     super(Todo, self).save(*args, **kwargs)
+    #     print(request.HttpRequest)
+    #     # 直接保存报错 needs to have a value for field "id" before this many-to-many relationship can be used.
+    #     # self.sub_executor_count = int(self.sub_executor.count())
+    #     # Todo.objects.update(sub_executor_count=self.sub_executor.count())
 
     @property
     def task_id(self):
@@ -73,6 +85,18 @@ class Todo(models.Model):
     @property
     def points(self):
         return int(self.predict_work * self.evaluate_factor)
+
+    @property
+    def main_workload(self):
+        return int(self.predict_work) * int(self.evaluate_factor)
+
+    @property
+    def sub_workload(self):
+        return self.predict_work * (1-int(self.evaluate_factor))/self.sub_executor.count
+
+    @classmethod
+    def sub_member(cls):
+        return cls.sub_executor.count
 
     def list_sub_executor(self):
         return ', '.join([a.real_name for a in self.sub_executor.all()])
