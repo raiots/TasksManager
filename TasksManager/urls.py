@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from TasksManager.settings import SITE_NAME
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.tasks.urls', namespace='tasks')),
 ]
 
-admin.site.site_header = '任务进度管理系统'
-admin.site.site_title = '任务进度管理系统'
-admin.site.index_title = u'任务进度管理系统'
+admin.site.site_header = SITE_NAME
+admin.site.site_title = SITE_NAME
+admin.site.index_title = SITE_NAME

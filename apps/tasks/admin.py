@@ -28,6 +28,7 @@ class TodoInline(admin.StackedInline):
     model = models.Todo
     extra = 0
     # classes = ['collapse']
+#TODO 选择年度任务时排序 https://www.codenong.com/40740869/
 
 
 class TaskAdmin(ImportExportModelAdmin):
@@ -151,6 +152,8 @@ class TodoAdmin(ImportExportModelAdmin):
         'duty_group',
         'main_executor',
         'list_sub_executor',
+        'predict_work',
+        'evaluate_factor',
         'maturity',
         'real_work',
         'complete_note',
@@ -164,7 +167,7 @@ class TodoAdmin(ImportExportModelAdmin):
     # raw_id_fields = ("sub_executor",)
     search_fields = ('todo_topic',)
     ordering = ('related_task', )
-    readonly_fields = [ "attachment"]
+    readonly_fields = ["attachment"]
 
     def approval_state(self, obj):
         return format_html('<span style="color:{};">{}</span>', 'green', obj.approval)

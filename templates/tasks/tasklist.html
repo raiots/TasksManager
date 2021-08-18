@@ -33,6 +33,12 @@
                 <!-- /.card-header -->
                 <div class="card-body p-0">
                   <table class="table table-striped" style="word-break: break-all; overflow: auto" cellspacing="0">
+                  <div class="row">
+                    <div class="col-12" style="background-color: #f2f2f2">
+                      <button type="button" id="unfold" onclick="alert1()" class="btn btn-default float-right"><i class="far fa-credit-card"></i> 展开
+                      </button>
+                    </div>
+                  </div>
                     <thead>
                       <tr style="background-color: #f2f2f2">
                         <th style="width: 140px; text-align:center; vertical-align: middle;">任务属性</th>
@@ -111,14 +117,30 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    <script>
-    function setHeight(element) {
-      $(element).css({'height':'auto','overflow-y':'hidden'}).height(element.scrollHeight);
-    }
-    $('textarea').each(function () {
-      setHeight(this);
-    }).on('input', function () {
-      setHeight(this);
-    });
-    </script>
+  <script>
+      function setHeight(element) {
+    $(element).css({'height':'auto','overflow-y':'hidden'}).height(element.scrollHeight);
+  }
+  $('textarea').each(function () {
+    setHeight(this);
+  }).on('input', function () {
+    setHeight(this);
+  });
+
+  </script>
 {% endblock %}
+
+{% block script %}
+  <script>
+
+  $('#unfold').click(function (element){
+          $(element).css({'height':'auto','overflow-y':'hidden'}).height(element.scrollHeight);
+            $('textarea').each(function () {
+    setHeight(this);
+  }).on('input', function () {
+    setHeight(this);
+  });
+  })
+  </script>
+{% endblock %}
+

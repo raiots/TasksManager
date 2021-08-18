@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>任务管理系统</title>
+  <title>任务管理工具</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{% static 'tasks/dist/css/googlefont.css' %}">
@@ -32,7 +32,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="container-xl">
       <a href="{% url 'tasks:index' %}" class="navbar-brand">
         <img src="{% static 'tasks/dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">任务管理系统</span>
+        <span class="brand-text font-weight-light">任务管理工具</span>
       </a>
 
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -191,7 +191,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-tabs">
             <a>欢迎，</a>
             <b style="color: cadetblue">{{ user.real_name }}</b>
-            <a>。 本系统为非涉密应用系统，禁止处理秘密级及以上信息！！！</a>
+            <a>。 本软件为非涉密应用工具，禁止处理秘密级及以上信息！！！</a>
           </li>
           <li class="navbar-tabs">
             <a href="{% url 'tasks:logout' %}">&nbsp;登出</a>

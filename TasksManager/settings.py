@@ -139,6 +139,7 @@ AUTH_USER_MODEL = 'users.User'
 # 它确定库是否会在数据导入中使用数据库事务，以确保安全。
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
+SITE_NAME = '任务管理工具'
 # SimpleUI 配置
 
 # 离线模式
@@ -149,7 +150,7 @@ SIMPLEUI_HOME_INFO = False
 SIMPLEUI_HOME_QUICK = True
 SIMPLEUI_HOME_ACTION = True
 SIMPLEUI_ANALYSIS = False
-SIMPLEUI_HOME_TITLE = '任务管理系统'
+SIMPLEUI_HOME_TITLE = SITE_NAME
 # SIMPLEUI_HOME_PAGE = 'https://www.baidu.com' # 可用于嵌入其他链接，这里可以直接方便的嵌入报表链接
 SIMPLEUI_HOME_ICON = 'el el-icon-platform-eleme'
 # ICON 支持element-ui和fontawesome  eg：fa fa-user

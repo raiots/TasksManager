@@ -6,21 +6,31 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, F, FloatField, Count, Q
 from django.db.models.functions import Coalesce
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 import django.utils.timezone as timezone
 from django.views import View
+from django.db import connection
 # Create your views here.
 from apps.tasks.models import Todo, Task
 from apps.tasks.forms import TodoForm
 from apps.users.models import User
+from . import my_query
 from functools import reduce
 import pandas as pd
 
 
 class IndexView(View):
+    # TODO 解决系统时间变化，日期不刷新的问题
+    #  https://stackoverflow.com/questions/63072235/django-localdate-doesnt-return-correct-date
+    #  https://stackoverflow.com/questions/13225890/django-default-timezone-now-saves-records-using-old-time
+
     @method_decorator(login_required)
     def get(self, request, year=timezone.now().year, month=timezone.now().month):
+        raw = my_query.my_annotate()
+        # return HttpResponse(raw)
+
         basic_users = User.objects.filter(department=request.user.department).annotate(
             main_executor_count=Count('main_executor',
                                       filter=Q(main_executor__deadline__year=year, main_executor__deadline__month=month)
