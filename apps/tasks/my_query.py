@@ -1,6 +1,5 @@
 from django.db import connection
 
-
 def my_annotate():
     query1 = '''
             CREATE TEMPORARY TABLE work_cal AS

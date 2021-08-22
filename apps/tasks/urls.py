@@ -1,10 +1,11 @@
 from django.urls import path
-from apps.tasks import views
+from apps.tasks import views, tests
 
 app_name = 'tasks'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('<int:year>/<int:month>/', views.IndexView.as_view(), name='index_month'),
+    path('test/', tests.TestView.as_view(), name='index'),
     path('login/', views.UserLoginView.as_view(), name='login'),
     path('logout/', views.UserLogoutView.as_view(), name='logout'),
     path('todolist/', views.TodoListView.as_view(), name='todolist'),

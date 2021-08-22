@@ -36,7 +36,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">部门总任务数</span>
                         <span class="info-box-number">
-                            {{ department.count|floatformat:'0'|default_if_none:'0' }}
+                            {{ department_cal.depart_count|floatformat:'0'|default_if_none:'0' }}
                           <small>个</small>
                         </span>
                       </div>
@@ -50,7 +50,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">部门预计总工作量</span>
                         <span class="info-box-number">
-                            {{ department.pre_total|default_if_none:'0'|floatformat:'1' }}
+                            {{ department_cal.pre_cal|default_if_none:'0'|floatformat:'1' }}
                         <small></small>
                         </span>
                       </div>
@@ -64,7 +64,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">部门实际总工作量</span>
                         <span class="info-box-number">
-                         {{ department.real_total|default_if_none:'0'|floatformat:'1' }}
+                         {{ department_cal.real_cal|default_if_none:'0'|floatformat:'1' }}
                         <small></small>
                         </span>
                       </div>
@@ -79,7 +79,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">部门预计平均工作量</span>
                         <span class="info-box-number">
-                         {{ department.pre_avg|default_if_none:'0'|floatformat:'1' }}
+                         {{ department_cal.pre_avg|default_if_none:'0'|floatformat:'1' }}
                         <small></small>
                         </span>
                       </div>
@@ -93,7 +93,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">部门实际平均工作量</span>
                         <span class="info-box-number">
-                            {{ department.real_avg|default_if_none:'0'|floatformat:'1' }}
+                            {{ department_cal.real_avg|default_if_none:'0'|floatformat:'1' }}
                         <small></small>
                         </span>
                       </div>
@@ -157,7 +157,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">承办任务数</span>
                         <span class="info-box-number">
-                            {% for user in current_user %}{{ user.main_executor_count }}{% endfor %}
+                            {{ current_user.main_count }}
                           <small>个</small>
                         </span>
                       </div>
@@ -173,7 +173,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">协办任务数</span>
                         <span class="info-box-number">
-                            {% for user in current_user %}{{ user.sub_executor_count }}{% endfor %}
+                            {{ current_user.sub_count }}
                         <small>个</small>
                         </span>
                       </div>
@@ -187,7 +187,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">预计工作量</span>
                         <span class="info-box-number">
-                            {% for user in current_user %}{{ user.pre_credit|default_if_none:'0' }}{% endfor %}
+                            {{ current_user.pre_cal|floatformat:'1'|default_if_none:'0' }}
                         <small></small>
                         </span>
                       </div>
@@ -201,7 +201,7 @@
                       <div class="info-box-content">
                         <span class="info-box-text">实际工作量</span>
                         <span class="info-box-number">
-                            {% for user in current_user %}{{ user.real_credit|default_if_none:'0' }}{% endfor %}
+                            {{ current_user.real_cal|floatformat:'1'|default_if_none:'0' }}
                         <small></small>
                         </span>
                       </div>
@@ -376,7 +376,7 @@
                   pointStrokeColor    : '#c1c7d1',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(220,220,220,1)',
-                  data                : [{% for user in users_data.values %}'{{ user.sub_executor_count }}', {% endfor %}]
+                  data                : [{% for user in users_data.values %}'{{ user.sub_count }}', {% endfor %}]
                 },
                 {
                   label               : '承办任务',
@@ -387,7 +387,7 @@
                   pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data                : [{% for user in users_data.values %}'{{ user.main_executor_count }}', {% endfor %}]
+                  data                : [{% for user in users_data.values %}'{{ user.main_count }}', {% endfor %}]
                 },
                   {
                   label               : '预计工作量',
@@ -398,7 +398,7 @@
                   pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data                : [{% for user in users_data.values %}'{{ user.pre_credit|floatformat:'1' }}', {% endfor %}]
+                  data                : [{% for user in users_data.values %}'{{ user.pre_cal|floatformat:'1' }}', {% endfor %}]
                 },
                                 {
                   label               : '工作量',
@@ -409,7 +409,7 @@
                   pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data                : [{% for user in users_data.values %}'{{ user.real_credit|floatformat:'1' }}', {% endfor %}]
+                  data                : [{% for user in users_data.values %}'{{ user.real_cal|floatformat:'1' }}', {% endfor %}]
                 },
               ]
     }
