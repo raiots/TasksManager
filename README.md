@@ -23,6 +23,12 @@ from 2020-7-13 to 2021-3-31
 
 这是一个由Django开发的任务分发系统
 
+
+![QQ20210912003100.png](https://images.everains.com/images/2021/09/12/QQ20210912003100.png)
+![QQ20210912003117.png](https://images.everains.com/images/2021/09/12/QQ20210912003117.png)
+![QQ20210912003139.png](https://images.everains.com/images/2021/09/12/QQ20210912003139.png)
+![QQ20210912003237.png](https://images.everains.com/images/2021/09/12/QQ20210912003237.png)
+
 #### feature：
 
 * 员工可以看到自己负责的承办任务和协办任务
@@ -30,10 +36,6 @@ from 2020-7-13 to 2021-3-31
 * 高定制度的后台管理页面
 
 
-![QQ20210912003100.png](https://images.everains.com/images/2021/09/12/QQ20210912003100.png)
-![QQ20210912003117.png](https://images.everains.com/images/2021/09/12/QQ20210912003117.png)
-![QQ20210912003139.png](https://images.everains.com/images/2021/09/12/QQ20210912003139.png)
-![QQ20210912003237.png](https://images.everains.com/images/2021/09/12/QQ20210912003237.png)
 
 ![image.png](https://images.raiot.me/images/2021/03/31/image.png)
 ![image439e7eab9ba979b0.png](https://images.raiot.me/images/2021/03/31/image439e7eab9ba979b0.png)
