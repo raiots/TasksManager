@@ -1,11 +1,13 @@
-from django.urls import path
+from django.urls import path, include
+import debug_toolbar
 from apps.tasks import views, tests
+from TasksManager import settings
 
 app_name = 'tasks'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('<int:year>/<int:month>/', views.IndexView.as_view(), name='index_month'),
-    path('test/', tests.TestView.as_view(), name='index'),
+    path('test/', tests.TestView.as_view(), name='test'),
     path('login/', views.UserLoginView.as_view(), name='login'),
     path('logout/', views.UserLogoutView.as_view(), name='logout'),
     path('todolist/', views.TodoListView.as_view(), name='todolist'),
@@ -16,3 +18,10 @@ urlpatterns = [
     path('tasklist/', views.TaskListView.as_view(), name='tasklist'),
     path('about/', views.AboutView.as_view(), name='about'),
 ]
+#
+# if settings.DEBUG:
+#     import debug_toolbar
+#     urlpatterns = [
+#         path('__debug__/', include(debug_toolbar.urls)),
+#     ] + urlpatterns
+

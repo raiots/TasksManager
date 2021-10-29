@@ -202,16 +202,17 @@ class TodoAdmin(ImportExportModelAdmin):
         else:
             return False
 
-    def save_model(self, request, obj, form, change):
-        # 这一行代码写了一个晚上呜呜！ 解决了当保存时，无法从未保存的数据中获取协办人数的问题！
-        mvDict = dict(request.POST)
+    # def save_model(self, request, obj, form, change):
+    #     # 这一行代码写了一个晚上呜呜！ 解决了当保存时，无法从未保存的数据中获取协办人数的问题！
+    #     mvDict = dict(request.POST)
         # dicts = request.POST
         # print(dicts)
         # for key, values in dicts:
         #     print(key, values)
         # obj.user = request.user
-        obj.sub_executor_count = int(len(mvDict['sub_executor']))
-        super().save_model(request, obj, form, change)
+
+        # obj.sub_executor_count = int(len(mvDict['sub_executor']))
+        # super().save_model(request, obj, form, change)
 
     # 增加批量操作按钮
     actions = ['bulk_action']

@@ -9,6 +9,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>总览 ({{ date }}) </h1>
+                        <h1><font color="#FF0000">测试版，请勿用于生产环境！！！</font></h1>
                     </div>
                     <div class="col-sm-6">
 {#                        <ol class="breadcrumb float-sm-right">#}
@@ -292,21 +293,35 @@
                           <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">姓名</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">承办任务数</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">协办任务数</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">预计工作量</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">实际工作量</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="2" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">姓名</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" style="text-align: center">一季度</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" style="text-align: center">二季度</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" style="text-align: center">三季度</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" style="text-align: center">四季度</th>
+                            </tr>
+                            <tr role="row">
+                              <th>实际工作量</th>
+                              <th>完成质量</th>
+                              <th>实际工作量</th>
+                              <th>完成质量</th>
+                              <th>实际工作量</th>
+                              <th>完成质量</th>
+                              <th>实际工作量</th>
+                              <th>完成质量</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {% for user in users_data.values %}
+                            {% for user in stat.values %}
                                 <tr role="row" class="odd">
                                   <td class="sorting_1">{{ user.real_name }}</td>
-                                  <td>{{ user.main_executor_count}}</td>
-                                  <td>{{ user.sub_executor_count}}</td>
-                                  <td>{{ user.pre_credit|floatformat:'1' }}</td>
-                                  <td>{{ user.real_credit|floatformat:'1' }}</td>
+                                  <td>{{ user.real_cal_1}}</td>
+                                  <td>{{ user.quality_1 }}</td>
+                                  <td>{{ user.real_cal_2 }}</td>
+                                  <td>{{ user.quality_2|floatformat:'1' }}</td>
+                                  <td>{{ user.real_cal_3 }}</td>
+                                  <td>{{ user.quality_3 }}</td>
+                                  <td>{{ user.real_cal_4 }}</td>
+                                  <td>{{ user.quality_4|default_if_none:'0' }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
