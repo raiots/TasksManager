@@ -28,6 +28,7 @@ class IndexView(View):
     # TODO 解决系统时间变化，日期不刷新的问题
     #  https://stackoverflow.com/questions/63072235/django-localdate-doesnt-return-correct-date
     #  https://stackoverflow.com/questions/13225890/django-default-timezone-now-saves-records-using-old-time
+    #  https://stackoverflow.com/questions/38237777/django-timezone-now-vs-timezone-now
 
     @method_decorator(login_required)
     def get(self, request, year=timezone.now().year, month=timezone.now().month):
@@ -377,8 +378,11 @@ class GroupTodoList(View):
 
 class TaskListView(View):
     @method_decorator(login_required)
-    def get(self, request):
-        tasks = Task.objects.filter(department=request.user.department).order_by('task_id')
+    def get(self, request, year=timezone.now().year): # TODO 把timezone.now().year写在后面要用year替换的地方是否可以解决
+        tasks = Task.objects.filter(department=request.user.department, deadline__year=year).order_by('task_id') \
+                | Task.objects.filter(department=request.user.department, related_task__deadline__year=year).order_by('task_id')
+        # 使用‘或’，找出工作包/年度任务的截止日期在今年的年度任务。后面还要做一个筛选，以达到只显示本年度的工作包
+
         context = {'tasks': tasks}
         return render(request, 'tasks/tasklist.html', context)
 
