@@ -379,11 +379,14 @@ class GroupTodoList(View):
 class TaskListView(View):
     @method_decorator(login_required)
     def get(self, request, year=timezone.now().year): # TODO 把timezone.now().year写在后面要用year替换的地方是否可以解决
-        tasks = Task.objects.filter(department=request.user.department, deadline__year=year).order_by('task_id') \
-                | Task.objects.filter(department=request.user.department, related_task__deadline__year=year).order_by('task_id')
+        tasks = Task.objects.filter(department=request.user.department, deadline__year=year).order_by('task_id')\
+                 | Task.objects.filter(department=request.user.department, related_task__deadline__year=year).order_by('task_id')
+        tasks = tasks.distinct()
+        # tasks = Task.objects.filter(Q(department=request.user.department), Q(deadline__year=year) | Q(related_task__deadline__year=year)).order_by('task_id')
         # 使用‘或’，找出工作包/年度任务的截止日期在今年的年度任务。后面还要做一个筛选，以达到只显示本年度的工作包
+        year_quarter = {'1': [1, year], '2': [2, year], '3': [3, year], '4': [4, year]}
 
-        context = {'tasks': tasks}
+        context = {'tasks': tasks, 'year_quarter': year_quarter}
         return render(request, 'tasks/tasklist.html', context)
 
 

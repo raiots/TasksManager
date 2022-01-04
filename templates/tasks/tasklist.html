@@ -35,8 +35,15 @@
                   <table class="table table-striped" style="word-break: break-all; overflow: auto" cellspacing="0">
                   <div class="row">
                     <div class="col-12" style="background-color: #f2f2f2">
-                      <button type="button" id="unfold" onclick="alert1()" class="btn btn-default float-right"><i class="far fa-credit-card"></i> 展开
+                      <button type="button" id="unfold" onclick="alert1()" class="btn btn-default float-left"><i class="far fa-credit-card"></i> 展开
                       </button>
+                        <ul class="pagination float-md-right">
+                            {% load taskfilter %}
+                            <li class="page-item"><a class="page-link" href="/tasklist/{{ year_quarter.1|last_year }}">«</a></li>
+                            <li class="page-item"><a class="page-link"> {{ year_quarter.1|this_year }}年 </a></li>
+                            <li class="page-item"><a class="page-link" href="/tasklist/{{ year_quarter.1|next_year }}">»</a></li>
+                        </ul>
+
                     </div>
                   </div>
                     <thead>
@@ -86,16 +93,16 @@
                         <td>{{ task.aim_value }}</td>
                         {% load taskfilter %}
                         <td style="background-color: #BFE7A8; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #BFE7A8;">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'1'|safe }}{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #BFE7A8;">{% for todo in task.related_task.all %}{{ todo|quarter_cate:year_quarter.1|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #F5CCB0; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #F5CCB0">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'2'|safe }}{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #F5CCB0">{% for todo in task.related_task.all %}{{ todo|quarter_cate:year_quarter.2|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #F7E4A8; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #F7E4A8">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'3'|safe }}{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #F7E4A8">{% for todo in task.related_task.all %}{{ todo|quarter_cate:year_quarter.3|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="background-color: #83E1E3; padding: 0">
-                          <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %}{{ todo|quarter_cate:'4'|safe }}{% endfor %}</textarea>
+                          <textarea class="text-none-border" style="background-color: #83E1E3">{% for todo in task.related_task.all %}{{ todo|quarter_cate:year_quarter.4|safe }}{% endfor %}</textarea>
                         </td>
                         <td style="text-align:center;">{{ task.deadline | date:"Y.m" }}</td>
                         <td style="text-align:center;">{{ task.duty_group }}</td>
