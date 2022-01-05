@@ -314,14 +314,14 @@
                             {% for user in stat.values %}
                                 <tr role="row" class="odd">
                                   <td class="sorting_1">{{ user.real_name }}</td>
-                                  <td>{{ user.real_cal_1}}</td>
-                                  <td>{{ user.quality_1 }}</td>
-                                  <td>{{ user.real_cal_2 }}</td>
-                                  <td>{{ user.quality_2|floatformat:'1' }}</td>
-                                  <td>{{ user.real_cal_3 }}</td>
-                                  <td>{{ user.quality_3 }}</td>
-                                  <td>{{ user.real_cal_4 }}</td>
-                                  <td>{{ user.quality_4|default_if_none:'0' }}</td>
+                                  <td>{{ user.real_cal_1|default_if_none:'0'|floatformat:'1' }}</td>
+                                  <td>{{ user.quality_1|default_if_none:'0'|floatformat:'1' }}</td>
+                                  <td>{{ user.real_cal_2|default_if_none:'0'|floatformat:'1' }}</td>
+                                  <td>{{ user.quality_2|default_if_none:'0'|floatformat:'1' }}</td>
+                                  <td>{{ user.real_cal_3|default_if_none:'0'|floatformat:'1' }}</td>
+                                  <td>{{ user.quality_3|default_if_none:'0'|floatformat:'1' }}</td>
+                                  <td>{{ user.real_cal_4|default_if_none:'0'|floatformat:'1' }}</td>
+                                  <td>{{ user.quality_4|default_if_none:'0'|floatformat:'1' }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

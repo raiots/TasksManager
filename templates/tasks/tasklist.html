@@ -126,13 +126,13 @@
   <!-- /.content-wrapper -->
   <script>
       function setHeight(element) {
-    $(element).css({'height':'auto','overflow-y':'hidden'}).height(element.scrollHeight);
-  }
-  $('textarea').each(function () {
-    setHeight(this);
-  }).on('input', function () {
-    setHeight(this);
-  });
+          $(element).css({'height':'auto','overflow-y':'hidden'}).height(element.scrollHeight);
+      }
+      $('textarea').each(function () {
+          setHeight(this);
+      }).on('input', function () {
+          setHeight(this);
+      });
 
   </script>
 {% endblock %}
