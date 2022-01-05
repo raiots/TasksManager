@@ -55,6 +55,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="/admin/#tasks/task" class="nav-link">编辑任务</a>
           </li>
+          <li class="nav-item dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">管理域风险分析</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+              <li><a href="{% url 'tasks:todolist' %}" class="dropdown-item" style="font-size: 0.9rem"> 风险事件采集 </a></li>
+              <li><a href="{% url 'tasks:group_todolist' %}" class="dropdown-item" style="font-size: 0.9rem">风险事件批量采集</a></li>
+               <li><a href="{% url 'tasks:group_todolist' %}" class="dropdown-item" style="font-size: 0.9rem">可视化分析</a></li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="/admin/#users/user" class="nav-link">系统配置</a>
           </li>
