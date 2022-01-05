@@ -35,8 +35,8 @@
                   <table class="table table-striped" style="word-break: break-all; overflow: auto" cellspacing="0">
                   <div class="row">
                     <div class="col-12" style="background-color: #f2f2f2">
-                      <button type="button" id="unfold" onclick="alert1()" class="btn btn-default float-left"><i class="far fa-credit-card"></i> 展开
-                      </button>
+                      <button type="button" id="unfold" onclick="alert1()" class="btn btn-default float-left" style="display: block;"><i class="far fa-credit-card"></i> 展开</button>
+                        <button type="button" id="fold" onclick="alert1()" class="btn btn-default float-left" style="display: none;"><i class="far fa-credit-card"></i> 收起</button>
                         <ul class="pagination float-md-right">
                             {% load taskfilter %}
                             <li class="page-item"><a class="page-link" href="/tasklist/{{ year_quarter.1|last_year }}">«</a></li>
@@ -141,12 +141,26 @@
   <script>
 
   $('#unfold').click(function (element){
+      var unfold = document.getElementById("unfold");
+      var fold = document.getElementById("fold");
+      unfold.style.display = "none";
+      fold.style.display = "block";
           $(element).css({'height':'auto','overflow-y':'hidden'}).height(element.scrollHeight);
             $('textarea').each(function () {
     setHeight(this);
   }).on('input', function () {
     setHeight(this);
   });
+  })
+
+
+    $('#fold').click(function (element){
+      var unfold = document.getElementById("unfold");
+      var fold = document.getElementById("fold");
+      unfold.style.display = "block";
+      fold.style.display = "none";
+      location.reload();
+      // TODO 暂时无法解决让textarea恢复原本高度的问题，使用刷新代替
   })
   </script>
 {% endblock %}
