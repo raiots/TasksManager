@@ -65,8 +65,13 @@ class TaskAdmin(ImportExportModelAdmin):
 
     def save_model(self, request, obj, form, change):
         mvDict = dict(request.POST)
-        print(len(mvDict['related_task-0-sub_executor']))
-        obj.related_task__sub_executor_count = int(len(mvDict['related_task-0-sub_executor']))
+        # 解决当工作包协办人数均为0时报错
+        # print(len(mvDict['related_task-0-sub_executor']))
+        try:
+            obj.related_task__sub_executor_count = int(len(mvDict['related_task-0-sub_executor']))
+        except:
+            obj.related_task__sub_executor_count = 0
+
         super().save_model(request, obj, form, change)
 
 
