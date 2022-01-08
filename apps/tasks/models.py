@@ -40,7 +40,7 @@ class Todo(models.Model):
         default='0%',
     )
     real_work = models.DecimalField('实际工作量', default=0, max_digits=5, decimal_places=1, blank=False)
-    complete_note = models.TextField('完成情况说明', max_length=150, blank=True)
+    complete_note = models.TextField('完成情况说明', max_length=500, blank=True)
     quality_mark = models.ForeignKey('users.QualityMark', on_delete=models.SET_NULL, blank=True, null=True,
                                      verbose_name='质量评价')
     attachment = models.FileField('交付物查看', blank=True)

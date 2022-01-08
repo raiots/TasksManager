@@ -1,5 +1,5 @@
 from django.urls import path, include
-import debug_toolbar
+# import debug_toolbar
 from apps.tasks import views, tests
 from TasksManager import settings
 

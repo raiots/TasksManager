@@ -1,3 +1,4 @@
+from datetime import datetime
 import re
 
 from django.contrib import admin
@@ -206,6 +207,17 @@ class TodoAdmin(ImportExportModelAdmin):
             return True
         else:
             return False
+
+    # 对工作包页面选择其所属的年度任务中，对年度任务进行筛选。条件为：年度任务的完成时间不早于今年或年度任务中有工作包的完成时间晚于今年
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(TodoAdmin, self).get_form(request, obj, **kwargs)
+        query = models.Task.objects.filter(
+            department=request.user.department, deadline__year__gte=datetime.now().strftime('%Y')).order_by('task_id')\
+                                                    | models.Task.objects.filter(
+            department=request.user.department, related_task__deadline__year__gte=datetime.now().strftime('%Y'))\
+                                                        .order_by('task_id')
+        form.base_fields['related_task'].queryset = query.distinct()
+        return form
 
     # def save_model(self, request, obj, form, change):
     #     # 这一行代码写了一个晚上呜呜！ 解决了当保存时，无法从未保存的数据中获取协办人数的问题！
