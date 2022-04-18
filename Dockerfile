@@ -1,5 +1,5 @@
-# 从仓库拉取 带有 python 3.7 的 Linux 环境
-FROM python:3.7
+# 从仓库拉取 带有 python 3.8 的 Linux 环境
+FROM python:3.8
 
 # 设置 python 环境变量
 ENV PYTHONUNBUFFERED 1

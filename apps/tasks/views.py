@@ -31,6 +31,7 @@ class IndexView(View):
     #  https://stackoverflow.com/questions/38237777/django-timezone-now-vs-timezone-now
 
     @method_decorator(login_required)
+    #TODO 部门不用部门下用户累加
     def get(self, request, year=timezone.now().year, month=timezone.now().month):
 
         # 建立username和真实姓名的对应字典，并在工作量计算完成后插入结果集
@@ -343,10 +344,6 @@ class IndexView(View):
         print(stat_result)
 
         # return HttpResponse(result.items())
-
-
-
-
         # 为页面提供日期信息
         date = str(year) + '年' + str(month) + '月'
 

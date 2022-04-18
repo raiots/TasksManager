@@ -25,7 +25,7 @@ class Todo(models.Model):
     sub_executor_count = models.CharField('协办人数', max_length=32)
     related_task = models.ForeignKey('Task', related_name='related_task', on_delete=models.CASCADE, verbose_name='年度任务')
     predict_work = models.DecimalField('预计工作量', default=0, max_digits=5, decimal_places=1, blank=False)
-    evaluate_factor = models.DecimalField('折算系数', max_digits=5, decimal_places=1, blank=True, default='1')
+    evaluate_factor = models.DecimalField('折算系数', max_digits=5, decimal_places=1, blank=True, default='1') #Todo 小数点后2位
     maturity = models.CharField(
         verbose_name='成熟度',
         max_length=5,
