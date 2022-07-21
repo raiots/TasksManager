@@ -25,15 +25,17 @@ import decimal
 
 
 class IndexView(View):
-    # TODO 解决系统时间变化，日期不刷新的问题
-    #  https://stackoverflow.com/questions/63072235/django-localdate-doesnt-return-correct-date
-    #  https://stackoverflow.com/questions/13225890/django-default-timezone-now-saves-records-using-old-time
-    #  https://stackoverflow.com/questions/38237777/django-timezone-now-vs-timezone-now
-
     @method_decorator(login_required)
-    #TODO 部门不用部门下用户累加
-    def get(self, request, year=timezone.now().year, month=timezone.now().month):
-
+    def get(self, request, year=None, month=None):
+        # 搞成了！！！ 当月份更改时自动变更首页显示的月份！ 其实就是用的上面那个链接的方法，之前不知道为啥没去用
+        #  https://stackoverflow.com/questions/63072235/django-localdate-doesnt-return-correct-date
+        #  https://stackoverflow.com/questions/13225890/django-default-timezone-now-saves-records-using-old-time
+        #  https://stackoverflow.com/questions/38237777/django-timezone-now-vs-timezone-now
+        if year is None:
+            year = timezone.now().year
+        if month is None:
+            month = timezone.now().month
+        #TODO 部门不用部门下用户累加
         # 建立username和真实姓名的对应字典，并在工作量计算完成后插入结果集
         user_info = User.objects.filter(department=request.user.department)\
             .values_list('username', 'real_name')
