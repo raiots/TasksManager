@@ -4,3 +4,7 @@
 /db.sqlite3
 /identifier.sqlite
 migrations/
+
+node_modules
+.temp
+.cache
