@@ -36,6 +36,9 @@ from 2020-7-13 to 2021-3-31
 * 高定制度的后台管理页面
 
 
+### Contributors
 
-![image.png](https://images.raiot.me/images/2021/03/31/image.png)
-![image439e7eab9ba979b0.png](https://images.raiot.me/images/2021/03/31/image439e7eab9ba979b0.png)
+JetBrains OS License
+
+TasksManager has been developed with PyCharm IDE under JetBrains Open Source License.
+
