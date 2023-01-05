@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 import django.utils.timezone as timezone
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 from django.db import connection
 # Create your views here.
@@ -365,7 +366,8 @@ class TodoListView(View):
         my_todo = Todo.objects.filter(main_executor=request.user, deadline__year=year, deadline__month=month)
         my_sub_todo = Todo.objects.filter(sub_executor=request.user, deadline__year=year, deadline__month=month)
         date = str(year) + '年' + str(month) + '月'
-        context = {'my_todo': my_todo, 'my_sub_todo': my_sub_todo, 'date': date}
+        current_path = request.get_full_path()
+        context = {'my_todo': my_todo, 'my_sub_todo': my_sub_todo, 'date': date, 'current_path': current_path}
         return render(request, 'tasks/todolist.html', context)
 
 
@@ -375,7 +377,8 @@ class GroupTodoList(View):
         group_todo = Todo.objects.filter(main_executor__department=request.user.department, deadline__year=year,
                                          deadline__month=month).order_by('related_task_id', 'deadline')
         date = str(year) + '年' + str(month) + '月'
-        context = {'group_todo': group_todo, 'date': date}
+        current_path = request.get_full_path()
+        context = {'group_todo': group_todo, 'date': date, 'current_path': current_path}
         return render(request, 'tasks/group_todolist.html', context)
 
 
@@ -425,9 +428,13 @@ class TodoEntryView(View):
     def post(self, request, pk):
         todo_detail = Todo.objects.get(id=pk)
         form = TodoForm(instance=todo_detail, data=request.POST)
+        redirect_to = request.GET.get('next')
         if form.is_valid():
             form.save()
-            return redirect('tasks:todolist')
+            if url_has_allowed_host_and_scheme(redirect_to, None):
+                return redirect(redirect_to)
+            else:
+                return redirect('tasks:todolist')
             # return redirect('tasks:todo_detail', pk=pk)
 
 

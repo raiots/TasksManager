@@ -97,7 +97,7 @@
                         </td>
                         <td style="text-align: center"><textarea style="overflow:hidden; width: 100%" readonly="readonly">{{ todo.complete_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.quality_mark|default:'' }}</td>
-                        <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}">填报</a> </td>
+                        <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}?next={{ current_path }}">填报</a> </td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -150,7 +150,7 @@
                         </td>
                         <td style="text-align: center"><textarea style="overflow:hidden; width:100%" readonly="readonly">{{ todo.complete_note }}</textarea></td>
                         <td style="text-align: center">{{ todo.quality_mark|default:'' }}</td>
-                        <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}">填报</a> </td>
+                        <td><a href="{% url 'tasks:todo_detail' pk=todo.id %}?next={{ current_path }}">填报</a> </td>
                       </tr>
                       {% endfor %}
                     </tbody>
