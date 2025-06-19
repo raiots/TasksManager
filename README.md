@@ -1,6 +1,8 @@
 # TasksManager
 ### Beta 版本的说明
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/raiots/TasksManager)
+
 Author： [面壁的雨](https://raiot.me)
 
 某残念的练习之作，不断更新中。
